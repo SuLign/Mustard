@@ -1,0 +1,214 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cvt="clr-namespace:Mustard.UI.Converter;assembly=Mustard.UI.Converter"
+    xmlns:local="clr-namespace:Mustard.UI.Sunflower">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Mustard.UI.Sunflower;component/Controls/ButtonStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Mustard.UI.Sunflower;component/Controls/TextBoxStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Mustard.UI.Sunflower;component/Controls/ComboBoxStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Mustard.UI.Sunflower;component/Controls/CheckBoxStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Mustard.UI.Sunflower;component/Controls/ScrollViewerStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Mustard.UI.Sunflower;component/Controls/ScrollBarStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Mustard.UI.Sunflower;component/Controls/GroupBoxStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Mustard.UI.Sunflower;component/Controls/RadioButtonStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Mustard.UI.Sunflower;component/Controls/MenuItemStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Mustard.UI.Sunflower;component/Controls/MenuStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Mustard.UI.Sunflower;component/Controls/ListViewStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Mustard.UI.Sunflower;component/Controls/GridViewColumnHeaderStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Mustard.UI.Sunflower;component/Controls/TreeViewStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Mustard.UI.Sunflower;component/Controls/TreeViewItemStyle.xaml" />
+        <ResourceDictionary>
+            <cvt:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <cvt:BooleanReverseConverter x:Key="BooleanReverseConverter" />
+        </ResourceDictionary>
+    </ResourceDictionary.MergedDictionaries>
+    <Style x:Key="SunFlowerWindowStyle" TargetType="{x:Type local:SunFlowerWindow}">
+        <Setter Property="Foreground" Value="{DynamicResource Major_Foreground}" />
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+        <Setter Property="TitleForeground" Value="{DynamicResource Major_Foreground}" />
+        <Setter Property="MenuForeground" Value="{DynamicResource Sub2_Foreground}" />
+        <Setter Property="MenuBackground" Value="{DynamicResource Sub1_Background}" />
+        <Setter Property="WindowChrome.WindowChrome">
+            <Setter.Value>
+                <WindowChrome
+                    CaptionHeight="0"
+                    CornerRadius="0"
+                    GlassFrameThickness="-1"
+                    NonClientFrameEdges="None"
+                    UseAeroCaptionButtons="False" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:SunFlowerWindow}">
+                    <Border
+                        Padding="{TemplateBinding Padding}"
+                        Background="{DynamicResource Major_Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        SnapsToDevicePixels="True">
+                        <AdornerDecorator>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="26" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
+                                <Border BorderBrush="{DynamicResource Sub2_Background}" BorderThickness="0,0,0,1.5">
+                                    <Grid x:Name="captionButtonsGroup" Background="{DynamicResource Major_Background}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto" MinWidth="10" />
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="1" />
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="1" />
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="1" />
+                                        </Grid.ColumnDefinitions>
+                                        <Image
+                                            x:Name="imgIcon"
+                                            Width="22"
+                                            Height="22"
+                                            Margin="2"
+                                            RenderOptions.BitmapScalingMode="Unspecified">
+                                            <!--  LOGO  -->
+                                        </Image>
+                                        <TextBlock
+                                            Grid.Column="1"
+                                            Margin="10,0"
+                                            VerticalAlignment="Center"
+                                            FontFamily="Microsoft Yahei UI"
+                                            FontWeight="Normal"
+                                            Foreground="{TemplateBinding TitleForeground}"
+                                            RenderOptions.EdgeMode="Unspecified"
+                                            Text="{TemplateBinding Title}" />
+                                        <Grid
+                                            x:Name="menu"
+                                            Grid.Column="2"
+                                            Width="auto"
+                                            Height="25"
+                                            HorizontalAlignment="Left">
+                                            <ContentControl
+                                                Height="25"
+                                                Content="{TemplateBinding TitleMenu}"
+                                                Foreground="{TemplateBinding MenuForeground}" />
+                                        </Grid>
+                                        <Button
+                                            x:Name="btnMinimize"
+                                            Grid.Column="3"
+                                            Width="22"
+                                            Height="22"
+                                            Margin="2"
+                                            Padding="6"
+                                            Panel.ZIndex="100"
+                                            Background="Transparent"
+                                            BorderThickness="0"
+                                            Cursor="Hand">
+                                            <Path
+                                                Margin="1,0"
+                                                VerticalAlignment="Center"
+                                                Data="M0,0 10,0 10,2 0,2Z"
+                                                Fill="{DynamicResource Major_Foreground}"
+                                                SnapsToDevicePixels="True"
+                                                Stretch="Uniform" />
+                                        </Button>
+                                        <Button
+                                            x:Name="btnMaximize"
+                                            Grid.Column="5"
+                                            Width="22"
+                                            Height="22"
+                                            Margin="2"
+                                            Padding="4"
+                                            Panel.ZIndex="100"
+                                            Background="Transparent"
+                                            BorderThickness="0"
+                                            Cursor="Hand"
+                                            SnapsToDevicePixels="True">
+                                            <Path
+                                                Margin="1,0"
+                                                VerticalAlignment="Center"
+                                                Data="M0,0 10,0 10,8 0,8Z M2,2 8,2 2,6Z"
+                                                Fill="{DynamicResource Major_Foreground}"
+                                                SnapsToDevicePixels="True"
+                                                Stretch="Uniform" />
+                                        </Button>
+                                        <Button
+                                            x:Name="btnClose"
+                                            Grid.Column="7"
+                                            Width="22"
+                                            Height="22"
+                                            Margin="2"
+                                            Padding="4"
+                                            Panel.ZIndex="0"
+                                            Background="Transparent"
+                                            BorderThickness="0"
+                                            Cursor="Hand"
+                                            SnapsToDevicePixels="True">
+                                            <Path
+                                                Margin="2"
+                                                VerticalAlignment="Center"
+                                                Data="M7.9,6.61,11.64,3.1a1,1,0,0,0-1.36-1.46L6.53,5.15,3,1.41A1,1,0,1,0,1.57,2.77l3.5,3.75L1.33,10a1,1,0,0,0,0,1.42,1,1,0,0,0,.73.31,1,1,0,0,0,.68-.27L6.44,8,10,11.72a1,1,0,0,0,.73.31,1,1,0,0,0,.68-.27,1,1,0,0,0,.05-1.41Z"
+                                                Fill="{DynamicResource Major_Foreground}"
+                                                SnapsToDevicePixels="True"
+                                                Stretch="Uniform" />
+                                        </Button>
+                                    </Grid>
+                                </Border>
+                                <Border
+                                    Grid.Row="1"
+                                    BorderBrush="#30FFFFFF"
+                                    BorderThickness=".5,0,.5,.5">
+                                    <Grid>
+                                        <ContentPresenter />
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </AdornerDecorator>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="WindowState" Value="Maximized">
+                <Setter Property="Padding" Value="8,8,0,0" />
+            </Trigger>
+            <Trigger Property="WindowStyle" Value="None">
+                <Setter Property="WindowChrome.WindowChrome" Value="{x:Null}" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type local:SunFlowerWindow}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Border Grid.Row="0">
+                                    <Grid>
+                                        <Image MaxHeight="300" Opacity=".03">
+                                            <Image.Source>
+                                                <FormatConvertedBitmap Source="pack://application:,,,/JinWu.UIStyle;component/Resources/LOGO.png" />
+                                            </Image.Source>
+                                        </Image>
+                                        <ContentPresenter />
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="MaxWidth" Value="Infinity" />
+                    <Condition Property="MaxHeight" Value="Infinity" />
+                    <Condition Property="WindowState" Value="Maximized" />
+                </MultiTrigger.Conditions>
+                <MultiTrigger.Setters>
+                    <Setter Property="Padding" Value="8" />
+                </MultiTrigger.Setters>
+            </MultiTrigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

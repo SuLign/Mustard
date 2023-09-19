@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <TargetFramework>net48</TargetFramework>
+    <OutputPath>$(SolutionDir)bin\$(Configuration)\</OutputPath>
+    <Platforms>AnyCPU;x64</Platforms>
+    <LangVersion>preview</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <PlatformTargets>AnyCPU;x64</PlatformTargets>
+    <ApplicationIcon>ICON.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="ICON.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Mustard.Base\Mustard.Base.Core\Mustard.Base.Core.csproj" />
+    <ProjectReference Include="..\..\Mustard.UI\Mustard.UI.Sunflower\Mustard.UI.Sunflower.csproj" />
+    <ProjectReference Include="..\CopyBook.ViewModules\CopyBook.ViewModules.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="MainWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>

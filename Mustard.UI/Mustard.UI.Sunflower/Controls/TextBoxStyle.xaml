@@ -1,0 +1,115 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:st="clr-namespace:JinWu.EasyStyle">
+
+    <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3" />
+    <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA" />
+    <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5" />
+    <Style TargetType="{x:Type TextBox}">
+        <Setter Property="Background" Value="#10DDDDDD" />
+        <Setter Property="CaretBrush" Value="White" />
+        <Setter Property="BorderBrush" Value="#30DDDDDD" />
+        <Setter Property="Foreground" Value="#F5F5FF" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalContentAlignment" Value="Top" />
+        <Setter Property="Padding" Value="3,0" />
+
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="AllowDrop" Value="true" />
+        <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst" />
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Border
+                        x:Name="border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        SnapsToDevicePixels="True">
+                        <!--<StackPanel Orientation="Horizontal">
+                            <ContentControl
+                                x:Name="prefix"
+                                Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(st:TextBoxStyle.Prefix)}"
+                                Opacity="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(st:TextBoxStyle.PrefixOpacity)}" />
+                            <ScrollViewer
+                                x:Name="PART_ContentHost"
+                                Focusable="false"
+                                HorizontalScrollBarVisibility="Hidden"
+                                VerticalScrollBarVisibility="Hidden" />
+                            <ContentControl
+                                x:Name="superfix"
+                                Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(st:TextBoxStyle.Superfix)}"
+                                Opacity="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(st:TextBoxStyle.SuperfixOpacity)}" />
+                        </StackPanel>-->
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <ContentControl
+                                x:Name="prefix"
+                                Grid.Column="0"
+                                Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(st:TextBoxStyle.Prefix)}"
+                                Opacity="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(st:TextBoxStyle.PrefixOpacity)}" />
+                            <ScrollViewer
+                                x:Name="PART_ContentHost"
+                                Grid.Column="1"
+                                Focusable="false"
+                                HorizontalScrollBarVisibility="Hidden"
+                                VerticalScrollBarVisibility="Hidden" />
+                            <ContentControl
+                                x:Name="superfix"
+                                Grid.Column="2"
+                                Margin="0,0,10,0"
+                                Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(st:TextBoxStyle.Superfix)}"
+                                Opacity="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(st:TextBoxStyle.SuperfixOpacity)}" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="border" Property="Opacity" Value="0.56" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource TextBox.MouseOver.Border}" />
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="true">
+                            <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource TextBox.Focus.Border}" />
+                        </Trigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Text}" Value="{x:Null}" />
+                                <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(st:TextBoxStyle.HidePrefixWhenTextNull)}" Value="true" />
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.Setters>
+                                <Setter TargetName="prefix" Property="Visibility" Value="Hidden" />
+                            </MultiDataTrigger.Setters>
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=Text}" Value="{x:Null}" />
+                                <Condition Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(st:TextBoxStyle.HideSuperfixWhenTextNull)}" Value="true" />
+                            </MultiDataTrigger.Conditions>
+                            <MultiDataTrigger.Setters>
+                                <Setter TargetName="superfix" Property="Visibility" Value="Hidden" />
+                            </MultiDataTrigger.Setters>
+                        </MultiDataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true" />
+                    <Condition Property="IsSelectionActive" Value="false" />
+                </MultiTrigger.Conditions>
+                <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}" />
+            </MultiTrigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

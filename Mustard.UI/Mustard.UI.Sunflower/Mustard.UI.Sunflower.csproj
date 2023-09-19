@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <TargetFramework>net48</TargetFramework>
+    <OutputPath>$(SolutionDir)bin\$(Configuration)\</OutputPath>
+    <LangVersion>preview</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <PlatformTargets>AnyCPU;x64</PlatformTargets>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Mustard.Base\Mustard.Base.Toolset\Mustard.Base.Toolset.csproj" />
+    <ProjectReference Include="..\Mustard.UI.Converter\Mustard.UI.Converter.csproj" />
+    <ProjectReference Include="..\Mustard.UI.Effect\Mustard.UI.Effect.csproj" />
+    <ProjectReference Include="..\Mustard.UI.MVVM\Mustard.UI.MVVM.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="PresentationFramework.Aero2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ExtControls\" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <TargetFramework>net48</TargetFramework>
+    <OutputPath>$(SolutionDir)bin\$(Configuration)\</OutputPath>
+    <LangVersion>preview</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <PlatformTargets>AnyCPU;x64</PlatformTargets>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Mustard.UI\Mustard.UI.MVVM\Mustard.UI.MVVM.csproj" />
+    <ProjectReference Include="..\CopyBook.Core\CopyBook.Core.csproj" />
+  </ItemGroup>
+</Project>
