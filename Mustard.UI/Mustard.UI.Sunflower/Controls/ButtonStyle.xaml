@@ -1,14 +1,34 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:st="clr-namespace:Mustard.UI.Sunflower.Controls">
     <Style x:Key="FocusVisual">
         <Setter Property="Control.Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <Rectangle
-                        Margin="2"
-                        SnapsToDevicePixels="true"
-                        Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
-                        StrokeDashArray="1 2"
-                        StrokeThickness="1" />
+                    <Grid>
+                        <Rectangle
+                            Margin="4"
+                            RadiusX="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(st:ButtonStyle.CornerRadius)}"
+                            RadiusY="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(st:ButtonStyle.CornerRadius)}"
+                            SnapsToDevicePixels="true"
+                            Stroke="#30DDDDDD"
+                            StrokeThickness="1" />
+                        <Path
+                            Width="{TemplateBinding Width}"
+                            Data="M100,0 140,0 70,100 30,100Z M150,0 160,0 90,100 80,100Z"
+                            Fill="#52454545"
+                            Stretch="Uniform" />
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontFamily="Microsoft Yahei"
+                            FontSize="{TemplateBinding Height}"
+                            FontWeight="Bold"
+                            Opacity=".2">
+                            Mustard Button
+                        </TextBlock>
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -28,10 +48,10 @@
         <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}" />
         <Setter Property="Foreground" Value="#C5C5C5" />
         <Setter Property="BorderThickness" Value="1" />
-        <!--<Setter Property="lc:ButtonStyle.MouseOverBackground" Value="Aqua"/>-->
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Padding" Value="1" />
+        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -40,8 +60,10 @@
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(st:ButtonStyle.CornerRadius)}"
                         SnapsToDevicePixels="true">
                         <Grid>
+                            <Rectangle Fill="Transparent" />
                             <ContentPresenter
                                 x:Name="contentPresenter"
                                 Margin="{TemplateBinding Padding}"
@@ -57,7 +79,7 @@
                             <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter TargetName="border" Property="Background" Value="{StaticResource Button.MouseOver.Background}" />
+                            <Setter TargetName="border" Property="Background" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(st:ButtonStyle.MouseOverBackground)}" />
                             <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource Button.MouseOver.Border}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">

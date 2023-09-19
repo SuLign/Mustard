@@ -19,7 +19,7 @@
     </sunflower:SunFlowerWindow.DataContext>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
+            <RowDefinition Height="10" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -28,13 +28,36 @@
         </Grid.ColumnDefinitions>
         <GroupBox
             Grid.Row="1"
-            Margin="5"
-            Background="#12000000"
+            Margin="5,0,0,5"
             Header="文件集合">
             <sfctl:AdvTreeView BorderThickness="0" Opacity=".2" />
         </GroupBox>
-        <Grid>
-            <Button Command="{Binding La}" />
+        <Grid
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="5,0,5,5">
+            <GroupBox Background="#12000000" Header="文件查看">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <GroupBox
+                        Grid.Row="1"
+                        Margin="2"
+                        Header="Play Control">
+                        <VirtualizingStackPanel>
+                            <StackPanel
+                                Height="30"
+                                Margin="2,1"
+                                Orientation="Horizontal">
+                                <TextBlock Width="60" VerticalAlignment="Center">控制</TextBlock>
+                                <Button Width="120" />
+                            </StackPanel>
+                        </VirtualizingStackPanel>
+                    </GroupBox>
+                </Grid>
+            </GroupBox>
         </Grid>
     </Grid>
 </sunflower:SunFlowerWindow>
