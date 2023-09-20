@@ -22,7 +22,7 @@ public static class ButtonStyle
                 "CornerRadius",
                 typeof(double),
                 typeof(ButtonStyle),
-                new PropertyMetadata(10.0));
+                new PropertyMetadata(0.0));
 
     public static void SetMouseOverBackground(Button button, SolidColorBrush color) => button.SetValue(MouseOverBackgroundProperty, color);
 

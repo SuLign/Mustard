@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace Mustard.UI.MVVM;
 
-public class ViewModuleBase : INotifyPropertyChanged
+public class ViewModelBase : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler PropertyChanged;
 

@@ -49,18 +49,6 @@
                                 Stretch="Fill"
                                 Stroke="{TemplateBinding BorderBrush}" />
                         </Grid>
-                        <Line
-                            Grid.Row="1"
-                            Grid.Column="1"
-                            Margin="-1,0,0,0"
-                            VerticalAlignment="Top"
-                            Stretch="Fill"
-                            Stroke="{TemplateBinding BorderBrush}"
-                            StrokeThickness="1"
-                            X1="0"
-                            X2="1"
-                            Y1="0"
-                            Y2="0" />
                         <Border
                             Grid.Row="1"
                             Grid.RowSpan="1"
@@ -75,6 +63,18 @@
                             Width="Auto"
                             Margin="{TemplateBinding Padding}"
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        <Line
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="-1,0,0,0"
+                            VerticalAlignment="Top"
+                            Stretch="Fill"
+                            Stroke="{TemplateBinding BorderBrush}"
+                            StrokeThickness="1"
+                            X1="0"
+                            X2="1"
+                            Y1="0"
+                            Y2="0" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="HasHeader" Value="False">

@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <TargetFramework>net48</TargetFramework>
+    <OutputPath>$(SolutionDir)bin\$(Configuration)\</OutputPath>
+    <Platforms>AnyCPU;x64</Platforms>
+    <LangVersion>preview</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <PlatformTargets>AnyCPU;x64</PlatformTargets>
+    <ApplicationIcon>ICON.ico</ApplicationIcon>
+    <AssemblyName>矢量图形管理器</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ICON.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ICON.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Mustard.Base\Mustard.Base.Core\Mustard.Base.Core.csproj" />
+    <ProjectReference Include="..\..\Mustard.UI\Mustard.UI.Sunflower\Mustard.UI.Sunflower.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="MainWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="SS\" />
+  </ItemGroup>
+</Project>

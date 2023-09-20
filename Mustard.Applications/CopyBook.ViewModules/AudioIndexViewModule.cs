@@ -16,7 +16,7 @@ using System.Windows;
 
 namespace CopyBook.ViewModules;
 
-public class AudioIndexViewModule : ViewModuleBase
+public class AudioIndexViewModule : ViewModelBase
 {
     private readonly ReplyCommand playSound;
     private readonly ReplyCommand pause;

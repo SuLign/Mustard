@@ -1,0 +1,266 @@
+﻿<sunflower:SunFlowerWindow
+    x:Class="IconManagerApp.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:iconmanagerapp="clr-namespace:IconManagerApp"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sfctl="clr-namespace:Mustard.UI.Sunflower.Controls;assembly=Mustard.UI.Sunflower"
+    xmlns:sunflower="clr-namespace:Mustard.UI.Sunflower;assembly=Mustard.UI.Sunflower"
+    Title="图形检索"
+    Width="1200"
+    Height="800"
+    ColorTheme="Dark"
+    WindowStartupLocation="CenterScreen"
+    WindowState="Normal"
+    mc:Ignorable="d">
+    <sunflower:SunFlowerWindow.DataContext>
+        <iconmanagerapp:MainVM />
+    </sunflower:SunFlowerWindow.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <GroupBox
+            Grid.Row="1"
+            Margin="5,2,2,7"
+            Header="图形集合">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBox
+                    Height="25"
+                    VerticalContentAlignment="Center"
+                    Text="{Binding SearchPattern, UpdateSourceTrigger=PropertyChanged}" />
+                <ListBox
+                    x:Name="lstIconHost"
+                    Grid.Row="1"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    ItemsSource="{Binding SearchResultIcons}"
+                    SelectedItem="{Binding SelectedIcon}"
+                    SelectionChanged="SelectedChanged">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListBoxItem">
+                                        <Grid Height="25" Cursor="Hand">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="25" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Rectangle
+                                                Name="iconBackRect"
+                                                Grid.ColumnSpan="2"
+                                                Fill="Transparent" />
+                                            <Path
+                                                Name="iconImg"
+                                                Width="12"
+                                                Height="12"
+                                                Data="{Binding Data}"
+                                                Fill="#861b2d"
+                                                Stretch="Uniform" />
+                                            <TextBlock
+                                                Name="iconName"
+                                                Grid.Column="1"
+                                                VerticalAlignment="Center"
+                                                Foreground="#ADADAD"
+                                                Text="{Binding PackIconKind}" />
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter TargetName="iconName" Property="Foreground" Value="White" />
+                                                <Setter TargetName="iconImg" Property="Fill" Value="#A6232d" />
+                                                <Setter TargetName="iconBackRect" Property="Fill" Value="#22B6232d" />
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="iconName" Property="Foreground" Value="White" />
+                                                <Setter TargetName="iconImg" Property="Fill" Value="#B6232d" />
+                                                <Setter TargetName="iconBackRect" Property="Fill" Value="#32B6232d" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel
+                                IsItemsHost="True"
+                                VirtualizingPanel.IsVirtualizing="True"
+                                VirtualizingPanel.VirtualizationMode="Recycling" />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
+            </Grid>
+        </GroupBox>
+        <Grid
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="5,0,5,5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="350" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <GroupBox Margin="2,2,2,5" Header="图形查看">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="400" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <GroupBox
+                        Margin="0,0,5,0"
+                        Background="#161010"
+                        Header="预览">
+                        <StackPanel>
+                            <Path
+                                Width="150"
+                                Height="150"
+                                Margin="0,20,0,40"
+                                Data="{Binding SelectedIcon.Data}"
+                                Fill="Red"
+                                Stretch="Uniform" />
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                FontSize="14"
+                                FontWeight="Bold"
+                                Text="{Binding SelectedIcon.PackIconKind}" />
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Grid.Column="1" Header="图形数据">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Button
+                                Padding="5,2"
+                                HorizontalContentAlignment="Left"
+                                BorderThickness="0"
+                                Command="{Binding CopyData}">
+                                <TextBlock HorizontalAlignment="Left">复制Data数据</TextBlock>
+                            </Button>
+                            <TextBox
+                                Grid.Row="1"
+                                AcceptsReturn="True"
+                                Foreground="#FFDFCF"
+                                IsReadOnly="True"
+                                Opacity=".6"
+                                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                Text="{Binding SelectedIcon.Data}"
+                                TextWrapping="Wrap" />
+                            <Button
+                                Grid.Row="2"
+                                Padding="5,2"
+                                HorizontalContentAlignment="Left"
+                                BorderThickness="0"
+                                Command="{Binding CopyPath}">
+                                <TextBlock HorizontalAlignment="Left">复制Path控件</TextBlock>
+                            </Button>
+                            <TextBox
+                                Grid.Row="3"
+                                AcceptsReturn="True"
+                                Foreground="#FFDFCF"
+                                IsReadOnly="True"
+                                Opacity=".6"
+                                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                Text="{Binding PathCode}"
+                                TextWrapping="Wrap" />
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </GroupBox>
+            <GroupBox
+                Grid.Row="1"
+                Margin="2"
+                Header="所有图形索引">
+                <ListBox
+                    x:Name="lstAllIconHost"
+                    Grid.Row="1"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    ItemsSource="{Binding AllIcons}"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    SelectedItem="{Binding SelectedIcon}"
+                    SelectionChanged="SelectedChanged"
+                    VirtualizingPanel.IsVirtualizing="True"
+                    VirtualizingPanel.IsVirtualizingWhenGrouping="True"
+                    VirtualizingPanel.ScrollUnit="Pixel"
+                    VirtualizingPanel.VirtualizationMode="Recycling">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListBoxItem">
+                                        <Border
+                                            Width="90"
+                                            Height="90"
+                                            Margin="2"
+                                            Background="#121212"
+                                            BorderBrush="#37171D"
+                                            BorderThickness="1">
+                                            <Grid Cursor="Hand">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="60" />
+                                                    <RowDefinition Height="*" />
+                                                </Grid.RowDefinitions>
+                                                <Rectangle
+                                                    Name="iconBackRect"
+                                                    Grid.RowSpan="2"
+                                                    Fill="Transparent" />
+                                                <Path
+                                                    Name="iconImg"
+                                                    Width="45"
+                                                    Height="45"
+                                                    Data="{Binding Data}"
+                                                    Fill="#861b2d"
+                                                    Stretch="Uniform" />
+                                                <TextBlock
+                                                    Name="iconName"
+                                                    Grid.Row="1"
+                                                    Margin="5,0"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Foreground="#ADADAD"
+                                                    Text="{Binding PackIconKind}"
+                                                    TextTrimming="CharacterEllipsis" />
+                                            </Grid>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter TargetName="iconName" Property="Foreground" Value="White" />
+                                                <Setter TargetName="iconImg" Property="Fill" Value="#A6232d" />
+                                                <Setter TargetName="iconBackRect" Property="Fill" Value="#22B6232d" />
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="iconName" Property="Foreground" Value="White" />
+                                                <Setter TargetName="iconImg" Property="Fill" Value="#B6232d" />
+                                                <Setter TargetName="iconBackRect" Property="Fill" Value="#32B6232d" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <sfctl:VirtualizingWrapPanel VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling" />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
+            </GroupBox>
+        </Grid>
+    </Grid>
+</sunflower:SunFlowerWindow>
