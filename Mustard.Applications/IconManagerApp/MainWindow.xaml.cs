@@ -3,6 +3,9 @@ using Mustard.Base.Toolset;
 using Mustard.Interfaces.Framework;
 using Mustard.UI.Sunflower;
 
+using System;
+using System.Threading.Tasks;
+
 namespace IconManagerApp;
 
 /// <summary>
@@ -14,17 +17,14 @@ public partial class MainWindow : SunFlowerWindow
     public MainWindow()
     {
         InitializeComponent();
-        //SingletonContainer<IMustardMessageManager>.Instance.Error("Test Error");
-        OnDo();
-    }
-
-    private void OnDo()
-    {
     }
 
     private void SelectedChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
     {
-        lstIconHost.ScrollIntoView(e.AddedItems[0]);
-        lstAllIconHost.ScrollIntoView(e.AddedItems[0]);
+        if (e.AddedItems.Count > 0)
+        {
+            lstIconHost?.ScrollIntoView(e.AddedItems[0]);
+            lstAllIconHost?.ScrollIntoView(e.AddedItems[0]);
+        }
     }
 }

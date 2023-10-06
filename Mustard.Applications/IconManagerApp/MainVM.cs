@@ -92,6 +92,7 @@ internal class MainVM : ViewModelBase
         var all = PackIconDataFactory.Create();
         AllIcons = new ObservableCollection<PackIcon>();
         SearchResultIcons = new ObservableCollection<PackIcon>(all);
+        SelectedIcon = SearchResultIcons.ElementAt(0);
         if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
         {
             return;
@@ -130,5 +131,6 @@ internal class MainVM : ViewModelBase
         }
         var items = from item in AllIcons where item.PackIconKind.ToString().ToLower().Contains(pattern) select item;
         SearchResultIcons = new ObservableCollection<PackIcon>(items);
+        if(items != null && items.Count() > 0) SelectedIcon = items.ElementAt(0);
     }
 }

@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:plot="clr-namespace:PlotCore._2DChart;assembly=PlotCore"
     xmlns:sfctl="clr-namespace:Mustard.UI.Sunflower.Controls;assembly=Mustard.UI.Sunflower"
     xmlns:sunflower="clr-namespace:Mustard.UI.Sunflower;assembly=Mustard.UI.Sunflower"
     xmlns:vm="clr-namespace:CopyBook.ViewModules;assembly=CopyBook.ViewModules"
@@ -19,7 +20,7 @@
     </sunflower:SunFlowerWindow.DataContext>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="10" />
+            <RowDefinition Height="5" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -43,6 +44,17 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
                     <GroupBox
+                        Grid.Row="0"
+                        Margin="2"
+                        Background="Transparent"
+                        Header="频谱图">
+                        <plot:Plot2DChart
+                            Margin="0.5,0.5,0,0"
+                            BackBoardColor="#121212"
+                            GridVisible="true"
+                            SideWidth="10" />
+                    </GroupBox>
+                    <GroupBox
                         Grid.Row="1"
                         Margin="2"
                         Header="Play Control">
@@ -52,7 +64,24 @@
                                 Margin="2,1"
                                 Orientation="Horizontal">
                                 <TextBlock Width="60" VerticalAlignment="Center">控制</TextBlock>
-                                <Button Width="120" />
+                                <Button
+                                    Width="150"
+                                    HorizontalContentAlignment="Left"
+                                    Command="{Binding DisplayMessageBox}">
+                                    显示MessageBox
+                                </Button>
+                            </StackPanel>
+                            <StackPanel
+                                Height="30"
+                                Margin="2,1"
+                                Orientation="Horizontal">
+                                <TextBlock Width="60" VerticalAlignment="Center" />
+                                <Button
+                                    Width="150"
+                                    HorizontalContentAlignment="Left"
+                                    Command="{Binding DisplayOpenFileDialog}">
+                                    显示OpenFileDialog
+                                </Button>
                             </StackPanel>
                         </VirtualizingStackPanel>
                     </GroupBox>

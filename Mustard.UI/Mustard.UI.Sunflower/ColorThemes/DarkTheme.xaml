@@ -10,4 +10,32 @@
     <SolidColorBrush x:Key="Sub2_Foreground" Color="#E5E5E5" />
     <SolidColorBrush x:Key="Sub3_Foreground" Color="#C0C0C0" />
     <SolidColorBrush x:Key="Sub4_Foreground" Color="#A0A0A0" />
+
+    <!--  Button  -->
+    <SolidColorBrush x:Key="Default_Btn_Background" Color="Transparent" />
+    <SolidColorBrush x:Key="Default_Btn_BorderBrush" Color="Transparent" />
+
+    <SolidColorBrush x:Key="Default_Btn_MouseOver_Background" Color="#3C7FB1" />
+    <SolidColorBrush x:Key="Default_Btn_MouseOver_Foreground" Color="#3C7FB1" />
+    <SolidColorBrush x:Key="Default_Btn_MouseOver_BorderBrush" Color="#3C7FB1" />
+
+    <SolidColorBrush x:Key="Default_Btn_MousePressed_Background" Color="#1C5F91" />
+    <SolidColorBrush x:Key="Default_Btn_MousePressed_BorderBrush" Color="#1C5F91" />
+
+    <SolidColorBrush x:Key="Default_Btn_IsDefault_BorderBrush" Color="#C4E5F6" />
+
+    <SolidColorBrush x:Key="Default_Btn_IsDisable_Foreground" Color="#C4E5F6" />
+    <SolidColorBrush x:Key="Default_Btn_IsDisable_Background" Color="#C4E5F6" />
+    <SolidColorBrush x:Key="Default_Btn_IsDisable_BorderBrush" Color="#C4E5F6" />
+
+    <!--  Title Bar  -->
+    <SolidColorBrush x:Key="MouseOnStatusBar_Btn_Background" Color="#9E4957" />
+    <SolidColorBrush x:Key="Border_BorderBrush" Color="#861B2D" />
+
+    <!--  MessageBox Image Color  -->
+    <SolidColorBrush x:Key="MessageBoxImage_Warning" Color="#f0f000" />
+    <SolidColorBrush x:Key="MessageBoxImage_Question" Color="#9E4957" />
+    <SolidColorBrush x:Key="MessageBoxImage_Error" Color="#FF0000" />
+    <SolidColorBrush x:Key="MessageBoxImage_Information" Color="#00FF90" />
+
 </ResourceDictionary>

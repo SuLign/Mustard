@@ -26,6 +26,76 @@
     <ProjectReference Include="..\..\Mustard.UI\Mustard.UI.Sunflower\Mustard.UI.Sunflower.csproj" />
     <ProjectReference Include="..\CopyBook.ViewModules\CopyBook.ViewModules.csproj" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <None Remove="Microsoft.Win32.Registry.dll" />
+    <None Remove="NAudio.Asio.dll" />
+    <None Remove="NAudio.Core.dll" />
+    <None Remove="NAudio.dll" />
+    <None Remove="NAudio.Midi.dll" />
+    <None Remove="NAudio.Wasapi.dll" />
+    <None Remove="NAudio.WinForms.dll" />
+    <None Remove="NAudio.WinMM.dll" />
+    <None Remove="OpenTK.dll" />
+    <None Remove="PlotCore.dll" />
+    <None Remove="SharpFont.dll" />
+    <None Remove="System.Security.AccessControl.dll" />
+    <None Remove="System.Security.Principal.Windows.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.Win32.Registry">
+      <HintPath>Microsoft.Win32.Registry.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio">
+      <HintPath>NAudio.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Asio">
+      <HintPath>NAudio.Asio.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Core">
+      <HintPath>NAudio.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Midi">
+      <HintPath>NAudio.Midi.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Wasapi">
+      <HintPath>NAudio.Wasapi.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.WinForms">
+      <HintPath>NAudio.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.WinMM">
+      <HintPath>NAudio.WinMM.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK">
+      <HintPath>OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="PlotCore">
+      <HintPath>PlotCore.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpFont">
+      <HintPath>SharpFont.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.AccessControl">
+      <HintPath>System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows">
+      <HintPath>System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="DFTLib.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="freetype6.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="PlotCore.Math.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <Compile Update="MainWindow.xaml.cs">

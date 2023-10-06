@@ -117,6 +117,7 @@ internal class MustardMessageManager : IMustardMessageManager
 
     public void MessageBoxShow(TResult text, MessageShowType showType, [CallerMemberName] string callerMemberName = null)
     {
+        MessageBoxEvent?.Invoke(text.ResultMessage, text);
     }
 
     public void Notice(TResult notice, [CallerMemberName] string callerMemberName = null)

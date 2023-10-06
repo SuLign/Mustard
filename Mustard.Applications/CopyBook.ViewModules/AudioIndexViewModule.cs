@@ -26,11 +26,19 @@ public class AudioIndexViewModule : ViewModelBase
     public ReplyCommand PlaySound => playSound;
     public ReplyCommand Pause => pause;
     public ReplyCommand Resume => resume;
+    public LazyCommand DisplayMessageBox => new Action(() =>
+    {
+        SingletonContainer<IMustardMessageManager>.Instance.MessageBoxShow("hello", Mustard.Base.BaseDefinitions.MessageShowType.WARNING);
+    });
+    public LazyCommand DisplayOpenFileDialog => new Action(() =>
+    {
+        MustardOpenFileDialog mustardOpenFileDialog = new MustardOpenFileDialog();
+        mustardOpenFileDialog.ShowDialog();
+    });
 
     public LazyCommand La => new Action(() =>
     {
         SingletonContainer<IMustardMessageManager>.Instance.MessageBoxShow("hello", Mustard.Base.BaseDefinitions.MessageShowType.WARNING);
-        MessageBox.Show("Hello");
     });
 
     public AudioIndexViewModule()

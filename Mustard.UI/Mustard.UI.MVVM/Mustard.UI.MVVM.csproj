@@ -14,4 +14,8 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <PlatformTargets>AnyCPU;x64</PlatformTargets>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Mustard.Base\Mustard.Base.Toolset\Mustard.Base.Toolset.csproj" />
+  </ItemGroup>
 </Project>
