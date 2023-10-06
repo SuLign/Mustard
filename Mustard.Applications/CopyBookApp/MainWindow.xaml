@@ -13,7 +13,7 @@
     Height="800"
     ColorTheme="Dark"
     WindowStartupLocation="CenterScreen"
-    WindowState="Normal"
+    WindowState="Maximized"
     mc:Ignorable="d">
     <sunflower:SunFlowerWindow.DataContext>
         <vm:AudioIndexViewModule />

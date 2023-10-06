@@ -4,6 +4,7 @@
     <SolidColorBrush x:Key="Sub1_Background" Color="#323232" />
     <SolidColorBrush x:Key="Sub2_Background" Color="#404040" />
     <SolidColorBrush x:Key="Sub3_Background" Color="#505050" />
+    <SolidColorBrush x:Key="Sub4_Background" Color="#222225" />
 
     <SolidColorBrush x:Key="Major_Foreground" Color="#fefeff" />
     <SolidColorBrush x:Key="Sub1_Foreground" Color="#f0f0f0" />

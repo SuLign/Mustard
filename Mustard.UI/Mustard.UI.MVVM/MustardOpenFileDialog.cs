@@ -1,26 +1,25 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Controls.Primitives;
-using System.Windows.Controls;
-using System.Windows.Interop;
-using System.Windows.Media.Effects;
-using System.Windows.Media;
-using System.Windows.Threading;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Interop;
+using System.Windows.Media;
+using System.Windows.Media.Effects;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+using System.Windows.Threading;
 
 using static Mustard.Base.Toolset.WinAPI;
-using System.Windows.Shapes;
-using Microsoft.Win32;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
-using System.Diagnostics;
-using System.Windows.Input;
+
+using Path = System.Windows.Shapes.Path;
 
 namespace Mustard.UI.MVVM;
 
@@ -35,6 +34,7 @@ public class MustardOpenFileDialog
     private IntPtr popHandle;
     private DispatcherFrame _dispatcherFrame;
     private IntPtr dialogActiveHandle;
+    private HwndSource sourceHandle;
 
     private void InitElementComponents()
     {
@@ -73,7 +73,7 @@ public class MustardOpenFileDialog
         //Grid.SetRowSpan(resizeGrip, 10);
         //hostGrid.Children.Add(resizeGrip);
 
-        var msgBoxImgPathData = "M19,20H4C2.89,20 2,19.1 2,18V6C2,4.89 2.89,4 4,4H10L12,6H19A2,2 0 0,1 21,8H21L4,8V18L6.14,10H23.21L20.93,18.5C20.7,19.37 19.92,20 19,20Z";
+        //var msgBoxImgPathData = "M19,20H4C2.89,20 2,19.1 2,18V6C2,4.89 2.89,4 4,4H10L12,6H19A2,2 0 0,1 21,8H21L4,8V18L6.14,10H23.21L20.93,18.5C20.7,19.37 19.92,20 19,20Z";
 
         var captionBorder = new Border
         {
@@ -127,7 +127,7 @@ public class MustardOpenFileDialog
         // Caption.
         var captionTextBlock = new TextBlock
         {
-            Margin = new Thickness(20, 0, 0, 0),
+            Margin = new Thickness(15, 0, 0, 0),
             FontSize = 15,
             Text = "打开文件",
             FontFamily = new FontFamily("Microsoft Yahei"),
@@ -140,18 +140,41 @@ public class MustardOpenFileDialog
         captionGrid.Children.Add(captionTextBlock);
 
         // Caption Icon.
-        var iconPath = new Path
+        var imgIcon = new Image
         {
-            Data = Geometry.Parse(msgBoxImgPathData),
-            Margin = new Thickness(15, 0, 0, 0),
+            Height = 20,
+            Width = 20,
             VerticalAlignment = VerticalAlignment.Center,
-            Stretch = Stretch.Uniform,
-            Opacity = 0.7,
-            Height = 13
+            Margin = new Thickness(15, 0, 0, 0),
         };
-        iconPath.SetResourceReference(Path.FillProperty, "Sub1_Foreground");
-        Grid.SetColumn(iconPath, 0);
-        captionGrid.Children.Add(iconPath);
+        try
+        {
+            var process = Process.GetCurrentProcess();
+            var iconBitmap = System.Drawing.Icon.ExtractAssociatedIcon(process.MainModule.FileName).ToBitmap();
+            using var bitmapStream = new MemoryStream();
+            iconBitmap.Save(bitmapStream, System.Drawing.Imaging.ImageFormat.Png);
+            bitmapStream.Seek(0, SeekOrigin.Begin);
+            var decoder = BitmapDecoder.Create(bitmapStream, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
+            if (decoder.Frames != null || decoder.Frames.Count != 0)
+            {
+                imgIcon.Source = decoder.Frames.OrderByDescending(e => e.PixelWidth).ElementAt(0);
+            }
+        }
+        catch { }
+        //var iconPath = new Path
+        //{
+        //    Data = Geometry.Parse(msgBoxImgPathData),
+        //    Margin = new Thickness(15, 0, 0, 0),
+        //    VerticalAlignment = VerticalAlignment.Center,
+        //    Stretch = Stretch.Uniform,
+        //    Opacity = 0.7,
+        //    Height = 13
+        //};
+        //iconPath.SetResourceReference(Path.FillProperty, "Sub1_Foreground");
+        //Grid.SetColumn(iconPath, 0);
+        //captionGrid.Children.Add(iconPath);
+        Grid.SetColumn(imgIcon, 0);
+        captionGrid.Children.Add(imgIcon);
 
         // Buttons.
         var buttonStackPanel = new StackPanel
@@ -253,7 +276,6 @@ public class MustardOpenFileDialog
         {
             FontSize = 16,
             VerticalContentAlignment = VerticalAlignment.Center,
-            Text = "12351sdasd"
         };
         Grid.SetColumn(addressFillTextBox, 1);
         navigateGrid.Children.Add(addressFillTextBox);
@@ -262,10 +284,9 @@ public class MustardOpenFileDialog
         TextBox searchFillTextBox = new TextBox
         {
             Width = 240,
-            Margin = new Thickness(10, 0, 10, 0),
+            Margin = new Thickness(5, 0, 5, 0),
             FontSize = 16,
             VerticalContentAlignment = VerticalAlignment.Center,
-            Text = "12351sdasd"
         };
         Grid.SetColumn(searchFillTextBox, 2);
         navigateGrid.Children.Add(searchFillTextBox);
@@ -292,7 +313,7 @@ public class MustardOpenFileDialog
 
         };
         Grid.SetRow(browserFileContent, 1);
-        browserFileContent.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(250, GridUnitType.Pixel) });
+        browserFileContent.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(350, GridUnitType.Pixel) });
         browserFileContent.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
         browserGrid.Children.Add(browserFileContent);
 
@@ -304,17 +325,104 @@ public class MustardOpenFileDialog
         };
         browserFileContent.Children.Add(folderTreeViewer);
 
-
+        // Bottom Grid.
         var bottomGrid = new Grid
         {
-            Opacity = 0.2,
         };
-        bottomGrid.SetResourceReference(Grid.BackgroundProperty, "Sub1_Background");
+        bottomGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+        bottomGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+        bottomGrid.SetResourceReference(Grid.BackgroundProperty, "Sub4_Background");
         Grid.SetRow(bottomGrid, 3);
         hostGrid.Children.Add(bottomGrid);
 
+        var bottomFillGird = new Grid
+        {
+            Margin = new Thickness(150, 7, 10, 0),
+        };
+        bottomFillGird.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Auto) });
+        bottomFillGird.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+        bottomFillGird.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Auto) });
+        bottomGrid.Children.Add(bottomFillGird);
+
+        bottomFillGird.Children.Add(new TextBlock
+        {
+            Text = "文件名:",
+            Margin = new Thickness(5, 0, 10, 0),
+            VerticalAlignment = VerticalAlignment.Center,
+            FontSize = 14,
+            Foreground = Brushes.White,
+            FontFamily = new FontFamily("Microsoft Yahei"),
+        });
+
+        var fileNameInput = new ComboBox
+        {
+            FontSize = 16,
+            Margin = new Thickness(0, 0, 5, 0),
+            VerticalContentAlignment = VerticalAlignment.Center,
+            IsEditable = true,
+        };
+        Grid.SetColumn(fileNameInput, 1);
+        bottomFillGird.Children.Add(fileNameInput);
+
+        var fileFilterInput = new ComboBox
+        {
+            FontSize = 16,
+            Width = 170,
+            VerticalContentAlignment = VerticalAlignment.Center,
+            IsEditable = true,
+        };
+        Grid.SetColumn(fileFilterInput, 2);
+        bottomFillGird.Children.Add(fileFilterInput);
+
+        var bottomBtnStackPanel = new StackPanel
+        {
+            HorizontalAlignment = HorizontalAlignment.Right,
+            Orientation = Orientation.Horizontal,
+            Margin = new Thickness(0, 0, 10, 0),
+        };
+        Grid.SetRow(bottomBtnStackPanel, 1);
+        bottomGrid.Children.Add(bottomBtnStackPanel);
+
+        var openBtn = new Button
+        {
+            Width = 80,
+            Content = "打开",
+            FontSize = 14,
+            Margin = new Thickness(0, 5, 0, 5),
+            FontFamily = new FontFamily("Microsoft Yahei"),
+            BorderBrush = new SolidColorBrush(Color.FromRgb(0x75, 0x75, 0x75)),
+            BorderThickness = new Thickness(1),
+        };
+        bottomBtnStackPanel.Children.Add(openBtn);
+
+        var cancelBtn = new Button
+        {
+            Width = 80,
+            Content = "取消",
+            FontSize = 14,
+            Margin = new Thickness(3, 5, 0, 5),
+            FontFamily = new FontFamily("Microsoft Yahei"),
+            BorderBrush = new SolidColorBrush(Color.FromRgb(0x75, 0x75, 0x75)),
+            BorderThickness = new Thickness(1),
+        };
+        bottomBtnStackPanel.Children.Add(cancelBtn);
+
+        displayPopup.MouseDown += GotFocus;
+        displayPopup.PreviewMouseDown += GotFocus;
+        addressFillTextBox.GotMouseCapture += GotFocus;
+        searchFillTextBox.GotMouseCapture += GotFocus;
+        fileFilterInput.GotMouseCapture += GotFocus;
+        fileNameInput.GotMouseCapture += GotFocus;
+        displayPopup.Focusable = true;
         displayPopup.IsOpen = true;
-        var sourceHandle = (HwndSource)PresentationSource.FromVisual(displayPopup.Child);
+        sourceHandle = (HwndSource)PresentationSource.FromVisual(displayPopup.Child);
+        SetFocus(sourceHandle.Handle);
+        SetForegroundWindow(sourceHandle.Handle);
+    }
+
+    private void GotFocus(object sender, RoutedEventArgs e)
+    {
+        SetFocus(sourceHandle.Handle);
         SetForegroundWindow(sourceHandle.Handle);
     }
 

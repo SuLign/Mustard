@@ -39,7 +39,7 @@ public class MustardMessageBox
     {
         displayPopup = new Popup();
         displayPopup.Width = 650;
-        displayPopup.Height = 300;
+        displayPopup.Height = 250;
         displayPopup.AllowsTransparency = true;
         displayPopup.PlacementRectangle = new Rect(
             new Point((SystemParameters.MaximizedPrimaryScreenWidth - displayPopup.Width) / 2,
@@ -194,13 +194,13 @@ public class MustardMessageBox
         // Caption.
         var captionTextBlock = new TextBlock
         {
-            Margin = new Thickness(20, 0, 0, 0),
+            Margin = new Thickness(10, 0, 0, 0),
             FontSize = 18,
             Text = caption,
             FontFamily = new FontFamily("Microsoft Yahei Bold"),
             VerticalAlignment = VerticalAlignment.Center,
             HorizontalAlignment = HorizontalAlignment.Left,
-            Opacity = 0.7
+            Opacity = 0.85
         };
         captionTextBlock.SetResourceReference(TextBlock.ForegroundProperty, "Sub1_Foreground");
         Grid.SetColumn(captionTextBlock, 1);
@@ -210,11 +210,11 @@ public class MustardMessageBox
         var iconPath = new Path
         {
             Data = Geometry.Parse(msgBoxImgPathData),
-            Margin = new Thickness(20, 2, 0, 0),
+            Margin = new Thickness(15, 2, 0, 0),
             VerticalAlignment = VerticalAlignment.Center,
             Stretch = Stretch.Uniform,
             Opacity = 0.5,
-            Height = 14
+            Height = 20
         };
         iconPath.SetResourceReference(Path.FillProperty, "Sub1_Foreground");
         Grid.SetColumn(iconPath, 0);
