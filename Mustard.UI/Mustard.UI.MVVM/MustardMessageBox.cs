@@ -460,7 +460,6 @@ public class MustardMessageBox
             {
                 GetCursorPos(out var mPos);
                 cPos = new Point(mPos.X - startPos.X + oldCPos.X, mPos.Y - startPos.Y + oldCPos.Y);
-                Debug.WriteLine($"{cPos.Y * 2}___{SystemParameters.PrimaryScreenHeight}");
                 if (cPos.Y + displayPopup.Height / 2 + 1 > SystemParameters.PrimaryScreenHeight / 2)
                 {
                     cPos.Y = SystemParameters.PrimaryScreenHeight / 2 - displayPopup.Height / 2;

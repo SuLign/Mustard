@@ -43,8 +43,8 @@ public class MustardOpenFileDialog
         displayPopup.Height = 800;
         displayPopup.AllowsTransparency = true;
         displayPopup.PlacementRectangle = new Rect(
-            new Point((SystemParameters.MaximizedPrimaryScreenWidth - displayPopup.Width) / 2,
-                (SystemParameters.MaximizedPrimaryScreenHeight - displayPopup.Height * 3) / 2),
+            new Point((SystemParameters.PrimaryScreenWidth - displayPopup.Width) / 2,
+                (SystemParameters.PrimaryScreenHeight - displayPopup.Height * 3) / 2),
             new Size(displayPopup.Width,
                 displayPopup.Height));
         displayPopup.Effect = new DropShadowEffect
@@ -431,9 +431,13 @@ public class MustardOpenFileDialog
             {
                 GetCursorPos(out var mPos);
                 cPos = new Point(mPos.X - startPos.X + oldCPos.X, mPos.Y - startPos.Y + oldCPos.Y);
+                if (cPos.Y + displayPopup.Height / 2 + 1 > SystemParameters.PrimaryScreenHeight / 2)
+                {
+                    cPos.Y = SystemParameters.PrimaryScreenHeight / 2 - displayPopup.Height / 2;
+                }
                 displayPopup.PlacementRectangle = new Rect(
-                    new Point((SystemParameters.MaximizedPrimaryScreenWidth - displayPopup.Width) / 2 + cPos.X,
-                        (SystemParameters.MaximizedPrimaryScreenHeight - displayPopup.Height * 3) / 2 + cPos.Y),
+                    new Point((SystemParameters.PrimaryScreenWidth - displayPopup.Width) / 2 + cPos.X,
+                        (SystemParameters.PrimaryScreenHeight - displayPopup.Height * 3) / 2 + cPos.Y),
                     new Size(displayPopup.Width,
                         displayPopup.Height));
             }
