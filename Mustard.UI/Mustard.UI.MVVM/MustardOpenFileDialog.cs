@@ -407,12 +407,7 @@ public class MustardOpenFileDialog
         };
         bottomBtnStackPanel.Children.Add(cancelBtn);
 
-        displayPopup.MouseDown += GotFocus;
         displayPopup.PreviewMouseDown += GotFocus;
-        addressFillTextBox.GotMouseCapture += GotFocus;
-        searchFillTextBox.GotMouseCapture += GotFocus;
-        fileFilterInput.GotMouseCapture += GotFocus;
-        fileNameInput.GotMouseCapture += GotFocus;
         displayPopup.Focusable = true;
         displayPopup.IsOpen = true;
         sourceHandle = (HwndSource)PresentationSource.FromVisual(displayPopup.Child);

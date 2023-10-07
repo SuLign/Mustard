@@ -3,12 +3,10 @@ using System.Collections;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Security;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
@@ -16,6 +14,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 
 using static Mustard.Base.Toolset.WinAPI;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace Mustard.UI.MVVM;
 
@@ -30,6 +29,7 @@ public class MustardMessageBox
     private static MustardMessageBox mustardMessageBox;
     private static DispatcherFrame _dispatcherFrame;
     private static IntPtr dialogActiveHandle;
+    private HwndSource sourceHandle;
 
     private MustardMessageBox()
     {
@@ -42,8 +42,8 @@ public class MustardMessageBox
         displayPopup.Height = 250;
         displayPopup.AllowsTransparency = true;
         displayPopup.PlacementRectangle = new Rect(
-            new Point((SystemParameters.MaximizedPrimaryScreenWidth - displayPopup.Width) / 2,
-                (SystemParameters.MaximizedPrimaryScreenHeight - displayPopup.Height * 3) / 2),
+            new Point((SystemParameters.PrimaryScreenWidth - displayPopup.Width) / 2,
+                (SystemParameters.PrimaryScreenHeight - displayPopup.Height * 3) / 2),
             new Size(displayPopup.Width,
                 displayPopup.Height));
         displayPopup.Effect = new DropShadowEffect
@@ -178,8 +178,8 @@ public class MustardMessageBox
         Grid.SetColumn(clsBtn, 2);
         clsBtn.Click += (_, _) =>
         {
-            _dispatcherFrame.Continue = false;
             displayPopup.IsOpen = false;
+            Dispatcher.ExitAllFrames();
             if (_threadWindowHandles != null)
             {
                 EnableThreadWindows(state: true);
@@ -246,13 +246,14 @@ public class MustardMessageBox
             var okButton = new Button
             {
                 Width = 90,
-                Margin = new Thickness(1, 2, 2, 2)
+                Margin = new Thickness(1, 2, 2, 2),
+                BorderThickness = new Thickness(0),
             };
             okButton.Click += (_, _) =>
             {
                 _dialogResult = MessageBoxResult.OK;
-                _dispatcherFrame.Continue = false;
                 displayPopup.IsOpen = false;
+                Dispatcher.ExitAllFrames();
                 if (_threadWindowHandles != null)
                 {
                     EnableThreadWindows(state: true);
@@ -286,6 +287,8 @@ public class MustardMessageBox
             okBtnContentStackPanel.Children.Add(okBtnText);
             okButton.Content = okBtnContentStackPanel;
 
+            okButton.IsDefault = true;
+
             buttonStackPanel.Children.Add(okButton);
         }
         if (messageBoxButton == MessageBoxButton.YesNoCancel || messageBoxButton == MessageBoxButton.YesNo)
@@ -293,13 +296,14 @@ public class MustardMessageBox
             var yesButton = new Button
             {
                 Width = 90,
-                Margin = new Thickness(1, 2, 2, 2)
+                Margin = new Thickness(1, 2, 2, 2),
+                BorderThickness = new Thickness(0),
             };
             yesButton.Click += (_, _) =>
             {
                 _dialogResult = MessageBoxResult.Yes;
-                _dispatcherFrame.Continue = false;
                 displayPopup.IsOpen = false;
+                Dispatcher.ExitAllFrames();
                 if (_threadWindowHandles != null)
                 {
                     EnableThreadWindows(state: true);
@@ -333,18 +337,21 @@ public class MustardMessageBox
             yesBtnContentStackPanel.Children.Add(yesBtnText);
             yesButton.Content = yesBtnContentStackPanel;
 
+            yesButton.IsDefault = true;
+
             buttonStackPanel.Children.Add(yesButton);
 
             var noButton = new Button
             {
                 Width = 90,
-                Margin = new Thickness(1, 2, 2, 2)
+                Margin = new Thickness(1, 2, 2, 2),
+                BorderThickness = new Thickness(0),
             };
             noButton.Click += (_, _) =>
             {
                 _dialogResult = MessageBoxResult.No;
-                _dispatcherFrame.Continue = false;
                 displayPopup.IsOpen = false;
+                Dispatcher.ExitAllFrames();
                 if (_threadWindowHandles != null)
                 {
                     EnableThreadWindows(state: true);
@@ -385,13 +392,14 @@ public class MustardMessageBox
             var cancelButton = new Button
             {
                 Width = 90,
-                Margin = new Thickness(1, 2, 2, 2)
+                Margin = new Thickness(1, 2, 2, 2),
+                BorderThickness = new Thickness(0),
             };
             cancelButton.Click += (_, _) =>
             {
                 _dialogResult = MessageBoxResult.Cancel;
-                _dispatcherFrame.Continue = false;
                 displayPopup.IsOpen = false;
+                Dispatcher.ExitAllFrames();
                 if (_threadWindowHandles != null)
                 {
                     EnableThreadWindows(state: true);
@@ -430,6 +438,16 @@ public class MustardMessageBox
         Grid.SetRow(buttonStackPanel, 2);
         hostGrid.Children.Add(buttonStackPanel);
         displayPopup.IsOpen = true;
+
+        displayPopup.PreviewMouseDown += (_, _) =>
+        {
+            SetFocus(sourceHandle.Handle);
+            SetForegroundWindow(sourceHandle.Handle);
+        };
+
+        sourceHandle = (HwndSource)PresentationSource.FromVisual(displayPopup.Child);
+        SetFocus(sourceHandle.Handle);
+        SetForegroundWindow(sourceHandle.Handle);
     }
 
     private void MustardMessageBoxDropMove(object sender, System.Windows.Input.MouseEventArgs e)
@@ -442,9 +460,14 @@ public class MustardMessageBox
             {
                 GetCursorPos(out var mPos);
                 cPos = new Point(mPos.X - startPos.X + oldCPos.X, mPos.Y - startPos.Y + oldCPos.Y);
+                Debug.WriteLine($"{cPos.Y * 2}___{SystemParameters.PrimaryScreenHeight}");
+                if (cPos.Y + displayPopup.Height / 2 + 1 > SystemParameters.PrimaryScreenHeight / 2)
+                {
+                    cPos.Y = SystemParameters.PrimaryScreenHeight / 2 - displayPopup.Height / 2;
+                }
                 displayPopup.PlacementRectangle = new Rect(
-                    new Point((SystemParameters.MaximizedPrimaryScreenWidth - displayPopup.Width) / 2 + cPos.X,
-                        (SystemParameters.MaximizedPrimaryScreenHeight - displayPopup.Height * 3) / 2 + cPos.Y),
+                    new Point((SystemParameters.PrimaryScreenWidth - displayPopup.Width) / 2 + cPos.X,
+                        (SystemParameters.PrimaryScreenHeight - displayPopup.Height * 3) / 2 + cPos.Y),
                     new Size(displayPopup.Width,
                         displayPopup.Height));
             }
@@ -496,7 +519,6 @@ public class MustardMessageBox
         {
             _threadWindowHandles.Add(hWnd);
         }
-
         return true;
     }
 
@@ -566,16 +588,17 @@ public class MustardMessageBox
 
     private static MessageBoxResult CreateMessage(string caption, string message, MessageBoxButton messageBoxButton, MessageBoxResult defaultMessageBoxResult, MessageBoxImage messageBoxImage)
     {
+        SetDialogHandle();
         var thread = new Thread(() =>
         {
             mustardMessageBox = new MustardMessageBox();
             mustardMessageBox.InitElementComponents(caption, message, messageBoxButton, defaultMessageBoxResult, messageBoxImage);
             Dispatcher.Run();
+            _dispatcherFrame.Continue = false;
         })
         { IsBackground = true };
         thread.SetApartmentState(ApartmentState.STA);
         thread.Start();
-        SetDialogHandle();
         // 阻塞
         ComponentDispatcher.PushModal();
         _dispatcherFrame = new DispatcherFrame();

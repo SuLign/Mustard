@@ -66,6 +66,7 @@
                                 <TextBlock Width="60" VerticalAlignment="Center">控制</TextBlock>
                                 <Button
                                     Width="150"
+                                    Padding="5,0"
                                     HorizontalContentAlignment="Left"
                                     Command="{Binding DisplayMessageBox}">
                                     显示MessageBox
@@ -78,6 +79,7 @@
                                 <TextBlock Width="60" VerticalAlignment="Center" />
                                 <Button
                                     Width="150"
+                                    Padding="5,0"
                                     HorizontalContentAlignment="Left"
                                     Command="{Binding DisplayOpenFileDialog}">
                                     显示OpenFileDialog
