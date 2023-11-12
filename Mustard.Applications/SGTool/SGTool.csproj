@@ -15,6 +15,8 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <PlatformTargets>AnyCPU;x64</PlatformTargets>
     <ApplicationIcon>Mustard.ico</ApplicationIcon>
+    <PlatformTarget>x64</PlatformTarget>
+    <AssemblyName>IPv6传输工具</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,7 +25,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Mustard.Base\Mustard.Base.Core\Mustard.Base.Core.csproj" />
-    <ProjectReference Include="..\..\Mustard.UIExtension\Mustard.UIExtension.PlotControl\Mustard.UIExtension.PlotControl.csproj" />
     <ProjectReference Include="..\..\Mustard.UI\Mustard.UI.Sunflower\Mustard.UI.Sunflower.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="MainWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

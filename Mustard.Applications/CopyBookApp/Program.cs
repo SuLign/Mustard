@@ -30,12 +30,12 @@ namespace CopyBookApp
             MessageBoxResult res = MessageBoxResult.None;
             res = MustardMessageBox.Show("提示", "提示内容。", messageBoxButton: System.Windows.MessageBoxButton.YesNoCancel, MessageBoxResult.None, MessageBoxImage.Information);
             Debug.WriteLine(res);
-            res = MustardMessageBox.Show("提示", "提示内容。", messageBoxButton: System.Windows.MessageBoxButton.OKCancel, MessageBoxResult.None, MessageBoxImage.Warning);
-            Debug.WriteLine(res);
-            res = MustardMessageBox.Show("提示", "提示内容。", messageBoxButton: System.Windows.MessageBoxButton.OKCancel, MessageBoxResult.None, MessageBoxImage.Exclamation);
-            Debug.WriteLine(res);
-            res = MustardMessageBox.Show("提示", "提示内容。", messageBoxButton: System.Windows.MessageBoxButton.OK, MessageBoxResult.None, MessageBoxImage.Exclamation);
-            Debug.WriteLine(res);
+            //res = MustardMessageBox.Show("提示", "提示内容。", messageBoxButton: System.Windows.MessageBoxButton.OKCancel, MessageBoxResult.None, MessageBoxImage.Warning);
+            //Debug.WriteLine(res);
+            //res = MustardMessageBox.Show("提示", "提示内容。", messageBoxButton: System.Windows.MessageBoxButton.OKCancel, MessageBoxResult.None, MessageBoxImage.Exclamation);
+            //Debug.WriteLine(res);
+            //res = MustardMessageBox.Show("提示", "提示内容。", messageBoxButton: System.Windows.MessageBoxButton.OK, MessageBoxResult.None, MessageBoxImage.Exclamation);
+            //Debug.WriteLine(res);
         }
     }
 }

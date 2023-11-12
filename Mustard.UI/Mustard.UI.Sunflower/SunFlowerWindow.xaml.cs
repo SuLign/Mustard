@@ -26,6 +26,8 @@ public class SunFlowerWindow : Window
     public static DependencyProperty WindowMaxButtonVisableProperty;
     public static DependencyProperty WindowMinButtonVisableProperty;
     public static DependencyProperty WindowClsButtonVisableProperty;
+    public static DependencyProperty TitleExtensionBarContentProperty;
+    public static DependencyProperty ShowStatusBarProperty;
     #endregion
 
     #region 属性
@@ -37,6 +39,8 @@ public class SunFlowerWindow : Window
     public bool WindowMaxButtonVisable { get => (bool)GetValue(WindowMaxButtonVisableProperty); set => SetValue(WindowMaxButtonVisableProperty, value); }
     public bool WindowMinButtonVisable { get => (bool)GetValue(WindowMinButtonVisableProperty); set => SetValue(WindowMinButtonVisableProperty, value); }
     public bool WindowClsButtonVisable { get => (bool)GetValue(WindowClsButtonVisableProperty); set => SetValue(WindowClsButtonVisableProperty, value); }
+    public object TitleExtensionBarContent { get => GetValue(TitleExtensionBarContentProperty); set => SetValue(TitleExtensionBarContentProperty, value); }
+    public bool ShowStatusBar { get => (bool)GetValue(ShowStatusBarProperty); set => SetValue(ShowStatusBarProperty, value); }
     #endregion
 
     #region 依赖属性更改事件
@@ -108,6 +112,8 @@ public class SunFlowerWindow : Window
     /// </summary>
     static SunFlowerWindow()
     {
+        SunFlowerCore.Init();
+
         var appResources = Application.Current.Resources;
 
         // 添加Xaml到程序资源中

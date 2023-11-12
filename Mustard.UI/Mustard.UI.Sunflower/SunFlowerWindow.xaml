@@ -19,10 +19,6 @@
         <ResourceDictionary Source="pack://application:,,,/Mustard.UI.Sunflower;component/Controls/GridViewColumnHeaderStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Mustard.UI.Sunflower;component/Controls/TreeViewStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Mustard.UI.Sunflower;component/Controls/TreeViewItemStyle.xaml" />
-        <ResourceDictionary>
-            <cvt:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-            <cvt:BooleanReverseConverter x:Key="BooleanReverseConverter" />
-        </ResourceDictionary>
     </ResourceDictionary.MergedDictionaries>
     <Style x:Key="SunFlowerWindowStyle" TargetType="{x:Type local:SunFlowerWindow}">
         <Setter Property="Foreground" Value="{DynamicResource Major_Foreground}" />
@@ -57,7 +53,7 @@
                                     <RowDefinition Height="26" />
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="auto" />
-                                    <RowDefinition Height="25" />
+                                    <RowDefinition Height="auto" />
                                 </Grid.RowDefinitions>
                                 <Border BorderBrush="{DynamicResource Sub2_Background}">
                                     <Grid x:Name="captionButtonsGroup" Background="{DynamicResource Major_Background}">
@@ -75,25 +71,29 @@
                                             <!--  5  -->
                                             <ColumnDefinition Width="auto" />
                                             <!--  6  -->
-                                            <ColumnDefinition Width="1" />
+                                            <ColumnDefinition Width="auto" />
                                             <!--  7  -->
-                                            <ColumnDefinition Width="auto" />
-                                            <!--  8  -->
                                             <ColumnDefinition Width="1" />
-                                            <!--  9  -->
+                                            <!--  8  -->
                                             <ColumnDefinition Width="auto" />
+                                            <!--  9  -->
+                                            <ColumnDefinition Width="1" />
                                             <!--  10  -->
+                                            <ColumnDefinition Width="auto" />
+                                            <!--  11  -->
                                             <ColumnDefinition Width="1" />
                                         </Grid.ColumnDefinitions>
                                         <Rectangle Grid.ColumnSpan="100" Fill="Transparent" />
                                         <Border
+                                            x:Name="captionBorder"
                                             Grid.ColumnSpan="3"
                                             Background="{DynamicResource Major_Background}"
                                             BorderBrush="{DynamicResource Sub2_Background}"
                                             BorderThickness="0,0,0,1" />
                                         <Path
+                                            x:Name="captionPath"
                                             Grid.Column="4"
-                                            Data="M0,10 10,0"
+                                            Data="M0,10 10,0 0,0"
                                             Fill="{DynamicResource Major_Background}"
                                             Stretch="Fill" />
                                         <Path
@@ -103,10 +103,13 @@
                                             Stroke="{DynamicResource Sub2_Background}" />
                                         <Image
                                             x:Name="imgIcon"
-                                            Width="22"
-                                            Height="22"
-                                            Margin="2"
-                                            RenderOptions.BitmapScalingMode="Unspecified">
+                                            Width="15"
+                                            Height="15"
+                                            Margin="5,2,2,2"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            RenderOptions.BitmapScalingMode="Unspecified"
+                                            Stretch="Uniform">
                                             <!--  LOGO  -->
                                         </Image>
                                         <TextBlock
@@ -129,9 +132,19 @@
                                                 Content="{TemplateBinding TitleMenu}"
                                                 Foreground="{TemplateBinding MenuForeground}" />
                                         </Grid>
+                                        <ContentControl
+                                            Grid.Column="5"
+                                            Height="24"
+                                            Margin="2"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            HorizontalContentAlignment="Center"
+                                            VerticalContentAlignment="Center"
+                                            Content="{TemplateBinding TitleExtensionBarContent}"
+                                            Foreground="{TemplateBinding MenuForeground}" />
                                         <Button
                                             x:Name="btnMinimize"
-                                            Grid.Column="5"
+                                            Grid.Column="6"
                                             Width="22"
                                             Height="22"
                                             Margin="2"
@@ -150,7 +163,7 @@
                                         </Button>
                                         <Button
                                             x:Name="btnMaximize"
-                                            Grid.Column="7"
+                                            Grid.Column="8"
                                             Width="22"
                                             Height="22"
                                             Margin="2"
@@ -170,7 +183,7 @@
                                         </Button>
                                         <Button
                                             x:Name="btnClose"
-                                            Grid.Column="9"
+                                            Grid.Column="10"
                                             Width="22"
                                             Height="22"
                                             Margin="2"
@@ -198,7 +211,14 @@
                                         <ContentPresenter />
                                     </Grid>
                                 </Border>
-                                <Grid Grid.Row="3" Background="#861b2d">
+                                <Grid
+                                    Grid.Row="3"
+                                    Height="25"
+                                    Visibility="{TemplateBinding ShowStatusBar,
+                                                                 Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <Grid.Background>
+                                        <SolidColorBrush Color="{DynamicResource Title.Static.Background}" />
+                                    </Grid.Background>
                                     <StackPanel Orientation="Horizontal">
                                         <Button
                                             ctrl:ButtonStyle.MouseOverBackground="{DynamicResource MouseOnStatusBar_Btn_Background}"
@@ -240,6 +260,21 @@
                                     </GeometryGroup>
                                 </Setter.Value>
                             </Setter>
+                            <!--<Setter TargetName="captionBorder" Property="Background">
+                                <Setter.Value>
+                                    <LinearGradientBrush>
+                                        <LinearGradientBrush.GradientStops>
+                                            <GradientStop Offset="0" Color="{DynamicResource Major.Background}" />
+                                            <GradientStop Offset="0.3" Color="{DynamicResource Title.Static.Background}" />
+                                        </LinearGradientBrush.GradientStops>
+                                    </LinearGradientBrush>
+                                </Setter.Value>
+                            </Setter>-->
+                            <!--<Setter TargetName="captionPath" Property="Fill">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="{DynamicResource Title.Static.Background}" />
+                                </Setter.Value>
+                            </Setter>-->
                         </Trigger>
                         <Trigger Property="WindowState" Value="Normal">
                             <Setter TargetName="btnMaximizeIcon" Property="Data">

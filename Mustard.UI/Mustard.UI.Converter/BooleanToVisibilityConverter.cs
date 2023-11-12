@@ -15,6 +15,14 @@ public class BooleanToVisibilityConverter : IValueConverter
             }
             return v ? Visibility.Visible : Visibility.Collapsed;
         }
+        if (value is double vi)
+        {
+            if (parameter is bool p)
+            {
+                return (vi > 0 & (!p)) ? Visibility.Visible : Visibility.Collapsed;
+            }
+            return vi > 0 ? Visibility.Visible : Visibility.Collapsed;
+        }
         return Visibility.Collapsed;
     }
 

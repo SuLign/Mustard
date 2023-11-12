@@ -1,0 +1,179 @@
+﻿<sunflower:SunFlowerWindow
+    x:Class="TransferIPv6.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sfctl="clr-namespace:Mustard.UI.Sunflower.Controls;assembly=Mustard.UI.Sunflower"
+    xmlns:sunflower="clr-namespace:Mustard.UI.Sunflower;assembly=Mustard.UI.Sunflower"
+    xmlns:transferipv6="clr-namespace:TransferIPv6"
+    Title="IPv6传输工具"
+    Width="700"
+    Height="400"
+    ColorTheme="Dark"
+    ResizeMode="NoResize"
+    WindowMaxButtonVisable="False"
+    WindowStartupLocation="CenterScreen"
+    WindowState="Normal"
+    mc:Ignorable="d">
+    <Grid Margin="0,-50,0,-30" VerticalAlignment="Center">
+        <Grid.DataContext>
+            <transferipv6:MainVM />
+        </Grid.DataContext>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="5*" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="1" Margin="0,20">
+            <GroupBox Padding="20,10,10,10" Header="本地配置">
+                <StackPanel>
+                    <Grid Margin="0,2.5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Width="80" Text="本地IPv6" />
+                        <ComboBox
+                            Grid.Column="1"
+                            Height="25"
+                            IsEditable="True"
+                            IsReadOnly="True"
+                            ItemsSource="{Binding LocalIPv6s}"
+                            Text="{Binding SelectedLocalIPv6}" />
+                    </Grid>
+                    <Grid Margin="0,2.5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Width="80" />
+                        <Button
+                            Grid.Column="1"
+                            Height="25"
+                            Margin="0,0,1,0"
+                            BorderBrush="{DynamicResource Sub1_Background}"
+                            Command="{Binding CheckIPv6Valition}">
+                            检索本机 IPv6
+                        </Button>
+                        <Button
+                            Grid.Column="2"
+                            Height="25"
+                            Margin="1,0,0,0"
+                            BorderBrush="{DynamicResource Sub1_Background}"
+                            Command="{Binding StartReceive}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock>
+                                    开始接收
+                                </TextBlock>
+                                <TextBlock
+                                    Foreground="{DynamicResource Sub4_Foreground}"
+                                    Opacity=".5"
+                                    Text="{Binding SendOrReceiveProcess, Converter={StaticResource ValueMultiPleConverter}, ConverterParameter=100, StringFormat={} ({0:0.#}%)}"
+                                    Visibility="{Binding SendOrReceiveProcess, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+                </StackPanel>
+            </GroupBox>
+            <Separator
+                Height="1"
+                Margin="0,10"
+                Opacity=".3">
+                <Separator.Background>
+                    <LinearGradientBrush>
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Offset="0" Color="{DynamicResource Default_Btn_MouseOver_Background.Color}" />
+                            <GradientStop Offset="{Binding SendOrReceiveProcess}" Color="{DynamicResource Default_Btn_IsDefault_BorderBrush.Color}" />
+                            <GradientStop Offset="{Binding SendOrReceiveProcess}" Color="{DynamicResource Sub2_Background.Color}" />
+                            <GradientStop Offset="1" Color="{DynamicResource Sub2_Background.Color}" />
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Separator.Background>
+            </Separator>
+            <GroupBox Padding="20,10,10,10" Header="发送配置">
+                <StackPanel>
+                    <Grid Margin="0,2.5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Width="80" Text="目标IPv6" />
+                        <TextBox
+                            Grid.Column="1"
+                            Height="25"
+                            Text="{Binding TargetIPv6}"
+                            TextChanged="IPv6Changed" />
+                    </Grid>
+                    <Grid Margin="0,2.5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="25" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Width="80" Text="发送文件" />
+                        <TextBox
+                            Grid.Column="1"
+                            Height="25"
+                            Text="{Binding FileToSend}" />
+                        <Button
+                            Grid.Column="2"
+                            Height="25"
+                            BorderBrush="{DynamicResource Sub1_Background}"
+                            Command="{Binding SendFile}">
+                            <Path
+                                Width="15"
+                                Height="15"
+                                Data="M16,12A2,2 0 0,1 18,10A2,2 0 0,1 20,12A2,2 0 0,1 18,14A2,2 0 0,1 16,12M10,12A2,2 0 0,1 12,10A2,2 0 0,1 14,12A2,2 0 0,1 12,14A2,2 0 0,1 10,12M4,12A2,2 0 0,1 6,10A2,2 0 0,1 8,12A2,2 0 0,1 6,14A2,2 0 0,1 4,12Z"
+                                Fill="{DynamicResource Default_Btn_MouseOver_Background}"
+                                Stretch="Uniform" />
+                        </Button>
+                    </Grid>
+                    <Grid Margin="0,2.5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Width="80" />
+                        <Button
+                            Grid.Column="1"
+                            Height="25"
+                            BorderBrush="{DynamicResource Sub1_Background}"
+                            Command="{Binding SendFile}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock>
+                                    发送文件
+                                </TextBlock>
+                                <TextBlock
+                                    Foreground="{DynamicResource Sub4_Foreground}"
+                                    Opacity=".5"
+                                    Text="{Binding SendOrReceiveProcess, Converter={StaticResource ValueMultiPleConverter}, ConverterParameter=100, StringFormat={} ({0:0.#}%)}"
+                                    Visibility="{Binding SendOrReceiveProcess, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+                </StackPanel>
+            </GroupBox>
+            <Separator
+                Height="1"
+                Margin="0,5"
+                Opacity=".3">
+                <Separator.Background>
+                    <LinearGradientBrush>
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Offset="0" Color="{DynamicResource Default_Btn_MouseOver_Background.Color}" />
+                            <GradientStop Offset="{Binding SendOrReceiveProcess}" Color="{DynamicResource Sub2_Background.Color}" />
+                            <GradientStop Offset="1" Color="{DynamicResource Default_Btn_MouseOver_Background.Color}" />
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Separator.Background>
+            </Separator>
+            <TextBlock
+                Height="30"
+                Foreground="DarkOrange"
+                Text="{Binding MessageNotice}"
+                TextWrapping="Wrap" />
+        </StackPanel>
+    </Grid>
+</sunflower:SunFlowerWindow>

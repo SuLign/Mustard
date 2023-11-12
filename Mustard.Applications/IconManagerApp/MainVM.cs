@@ -77,14 +77,28 @@ internal class MainVM : ViewModelBase
 
     public LazyCommand CopyData => new LazyCommand(() =>
     {
-        if (SelectedIcon == null) return;
-        Clipboard.SetText(SelectedIcon.Data);
+        try
+        {
+            if (SelectedIcon == null) return;
+            Clipboard.Clear();
+            Clipboard.SetText(SelectedIcon.Data);
+        }
+        catch
+        {
+        }
     });
 
     public LazyCommand CopyPath => new LazyCommand(() =>
      {
-         if (SelectedIcon == null) return;
-         Clipboard.SetText(PathCode);
+         try
+         {
+             if (SelectedIcon == null) return;
+             Clipboard.SetText(PathCode);
+         }
+         catch
+         {
+
+         }
      });
 
     public MainVM()
@@ -131,6 +145,6 @@ internal class MainVM : ViewModelBase
         }
         var items = from item in AllIcons where item.PackIconKind.ToString().ToLower().Contains(pattern) select item;
         SearchResultIcons = new ObservableCollection<PackIcon>(items);
-        if(items != null && items.Count() > 0) SelectedIcon = items.ElementAt(0);
+        if (items != null && items.Count() > 0) SelectedIcon = items.ElementAt(0);
     }
 }

@@ -1,37 +1,80 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <SolidColorBrush x:Key="Major_Background" Color="#121215" />
-    <SolidColorBrush x:Key="Deeper_Background" Color="#05050A" />
-    <SolidColorBrush x:Key="Sub1_Background" Color="#323232" />
-    <SolidColorBrush x:Key="Sub2_Background" Color="#404040" />
-    <SolidColorBrush x:Key="Sub3_Background" Color="#505050" />
-    <SolidColorBrush x:Key="Sub4_Background" Color="#222225" />
+    <Color x:Key="Major.Background">#121215</Color>
 
-    <SolidColorBrush x:Key="Major_Foreground" Color="#fefeff" />
-    <SolidColorBrush x:Key="Sub1_Foreground" Color="#f0f0f0" />
-    <SolidColorBrush x:Key="Sub2_Foreground" Color="#E5E5E5" />
-    <SolidColorBrush x:Key="Sub3_Foreground" Color="#C0C0C0" />
-    <SolidColorBrush x:Key="Sub4_Foreground" Color="#A0A0A0" />
+    <Color x:Key="Deeper_Background.Color">#05050A</Color>
+    <SolidColorBrush x:Key="Deeper_Background" Color="{StaticResource Deeper_Background.Color}" />
+
+    <Color x:Key="Sub1_Background.Color">#323232</Color>
+    <SolidColorBrush x:Key="Sub1_Background" Color="{StaticResource Sub1_Background.Color}" />
+
+    <Color x:Key="Sub2_Background.Color">#404040</Color>
+    <SolidColorBrush x:Key="Sub2_Background" Color="{StaticResource Sub2_Background.Color}" />
+
+    <Color x:Key="Sub3_Background.Color">#505050</Color>
+    <SolidColorBrush x:Key="Sub3_Background" Color="{StaticResource Sub3_Background.Color}" />
+
+    <Color x:Key="Sub4_Background.Color">#222225</Color>
+    <SolidColorBrush x:Key="Sub4_Background" Color="{StaticResource Sub4_Background.Color}" />
+
+    <Color x:Key="Major_Foreground.Color">#fefeff</Color>
+    <SolidColorBrush x:Key="Major_Foreground" Color="{StaticResource Major_Foreground.Color}" />
+
+    <Color x:Key="Sub1_Foreground.Color">#f0f0f0</Color>
+    <SolidColorBrush x:Key="Sub1_Foreground" Color="{StaticResource Sub1_Foreground.Color}" />
+
+    <Color x:Key="Sub2_Foreground.Color">#E5E5E5</Color>
+    <SolidColorBrush x:Key="Sub2_Foreground" Color="{StaticResource Sub2_Foreground.Color}" />
+
+    <Color x:Key="Sub3_Foreground.Color">#C0C0C0</Color>
+    <SolidColorBrush x:Key="Sub3_Foreground" Color="{StaticResource Sub3_Foreground.Color}" />
+
+    <Color x:Key="Sub4_Foreground.Color">#A0A0A0</Color>
+    <SolidColorBrush x:Key="Sub4_Foreground" Color="{StaticResource Sub4_Foreground.Color}" />
 
     <!--  Button  -->
-    <SolidColorBrush x:Key="Default_Btn_Background" Color="Transparent" />
-    <SolidColorBrush x:Key="Default_Btn_BorderBrush" Color="Transparent" />
 
-    <SolidColorBrush x:Key="Default_Btn_MouseOver_Background" Color="#3C7FB1" />
-    <SolidColorBrush x:Key="Default_Btn_MouseOver_Foreground" Color="#3C7FB1" />
-    <SolidColorBrush x:Key="Default_Btn_MouseOver_BorderBrush" Color="#3C7FB1" />
+    <Color x:Key="Default_Btn_Background.Color">Transparent</Color>
+    <SolidColorBrush x:Key="Default_Btn_Background" Color="{StaticResource Default_Btn_Background.Color}" />
 
-    <SolidColorBrush x:Key="Default_Btn_MousePressed_Background" Color="#1C5F91" />
-    <SolidColorBrush x:Key="Default_Btn_MousePressed_BorderBrush" Color="#1C5F91" />
+    <Color x:Key="Default_Btn_BorderBrush.Color">Transparent</Color>
+    <SolidColorBrush x:Key="Default_Btn_BorderBrush" Color="{StaticResource Default_Btn_BorderBrush.Color}" />
 
-    <SolidColorBrush x:Key="Default_Btn_IsDefault_BorderBrush" Color="#C4E5F6" />
 
-    <SolidColorBrush x:Key="Default_Btn_IsDisable_Foreground" Color="#C4E5F6" />
-    <SolidColorBrush x:Key="Default_Btn_IsDisable_Background" Color="#C4E5F6" />
-    <SolidColorBrush x:Key="Default_Btn_IsDisable_BorderBrush" Color="#C4E5F6" />
+    <Color x:Key="Default_Btn_MouseOver_Background.Color">#3C7FB1</Color>
+    <SolidColorBrush x:Key="Default_Btn_MouseOver_Background" Color="{StaticResource Default_Btn_MouseOver_Background.Color}" />
+
+    <Color x:Key="Default_Btn_MouseOver_Foreground.Color">#3C7FB1</Color>
+    <SolidColorBrush x:Key="Default_Btn_MouseOver_Foreground" Color="{StaticResource Default_Btn_MouseOver_Foreground.Color}" />
+
+    <Color x:Key="Default_Btn_MouseOver_BorderBrush.Color">#3C7FB1</Color>
+    <SolidColorBrush x:Key="Default_Btn_MouseOver_BorderBrush" Color="{StaticResource Default_Btn_MouseOver_BorderBrush.Color}" />
+
+
+    <Color x:Key="Default_Btn_MousePressed_Background.Color">#1C5F91</Color>
+    <SolidColorBrush x:Key="Default_Btn_MousePressed_Background" Color="{StaticResource Default_Btn_MousePressed_Background.Color}" />
+
+    <Color x:Key="Default_Btn_MousePressed_BorderBrush.Color">#1C5F91</Color>
+    <SolidColorBrush x:Key="Default_Btn_MousePressed_BorderBrush" Color="{StaticResource Default_Btn_MousePressed_BorderBrush.Color}" />
+
+
+    <Color x:Key="Default_Btn_IsDefault_BorderBrush.Color">#C4E5F6</Color>
+    <SolidColorBrush x:Key="Default_Btn_IsDefault_BorderBrush" Color="{StaticResource Default_Btn_IsDefault_BorderBrush.Color}" />
+
+
+    <Color x:Key="Default_Btn_IsDisable_Foreground.Color">#C4E5F6</Color>
+    <SolidColorBrush x:Key="Default_Btn_IsDisable_Foreground" Color="{StaticResource Default_Btn_Background.Color}" />
+
+    <Color x:Key="Default_Btn_IsDisable_Background.Color">#C4E5F6</Color>
+    <SolidColorBrush x:Key="Default_Btn_IsDisable_Background" Color="{StaticResource Default_Btn_IsDisable_Background.Color}" />
+
+    <Color x:Key="Default_Btn_IsDisable_BorderBrush.Color">#C4E5F6</Color>
+    <SolidColorBrush x:Key="Default_Btn_IsDisable_BorderBrush" Color="{StaticResource Default_Btn_IsDisable_BorderBrush.Color}" />
 
     <!--  Title Bar  -->
-    <SolidColorBrush x:Key="MouseOnStatusBar_Btn_Background" Color="#9E4957" />
-    <SolidColorBrush x:Key="Border_BorderBrush" Color="#861B2D" />
+    <Color x:Key="MouseOnStatusBar_Btn_Background">#9E4957</Color>
+    <Color x:Key="Title.Static.Background">#861B2D</Color>
+    <Color x:Key="Button.Static.Background.Color">#3C7FB1</Color>
 
     <!--  MessageBox Image Color  -->
     <SolidColorBrush x:Key="MessageBoxImage_Warning" Color="#f0f000" />

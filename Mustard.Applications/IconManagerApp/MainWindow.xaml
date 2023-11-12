@@ -10,6 +10,7 @@
     Title="图形检索"
     Width="1200"
     Height="800"
+    sunflower:ShowStatusBar="True"
     ColorTheme="Dark"
     WindowStartupLocation="CenterScreen"
     WindowState="Normal"

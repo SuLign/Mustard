@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sunflower="clr-namespace:Mustard.UI.Sunflower;assembly=Mustard.UI.Sunflower"
-    Title="Window1"
+    Title="Mustard Demo"
     Width="800"
     Height="450"
     ColorTheme="Dark"
