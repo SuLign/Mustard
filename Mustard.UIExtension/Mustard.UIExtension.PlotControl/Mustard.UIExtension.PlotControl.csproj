@@ -16,6 +16,21 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SharpGL.WPF" Version="3.1.1" />
+    <None Remove="GLBase\font.ttf" />
+    <None Remove="GLBase\STSONG.TTF" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="GLBase\font.ttf" />
+    <EmbeddedResource Include="GLBase\STSONG.TTF" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="OpenTK" Version="3.3.3" />
+    <PackageReference Include="SharpFont" Version="4.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Mustard.Base\Mustard.Base.Toolset\Mustard.Base.Toolset.csproj" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <SolidColorBrush x:Key="Major_Background" Color="#121215" />
-    <Color x:Key="Major.Background">#121215</Color>
+    <Color x:Key="Major.Background.Color">#121215</Color>
+    <SolidColorBrush x:Key="Major_Background" Color="{DynamicResource Major.Background.Color}" />
 
     <Color x:Key="Deeper_Background.Color">#05050A</Color>
     <SolidColorBrush x:Key="Deeper_Background" Color="{StaticResource Deeper_Background.Color}" />

@@ -4,7 +4,6 @@ using Mustard.Interfaces.Framework;
 
 using System;
 using System.Windows;
-using System.Windows.Navigation;
 
 namespace Mustard.Base.Core;
 
@@ -16,7 +15,7 @@ public class Startup
     {
         Initialize();
 
-        Application app = new Application();
+        Application app = new();
         var entryWindow = SingletonContainer<IMustardUIManager>.Instance.GetEntryWindow();
         app.Run(entryWindow);
     }

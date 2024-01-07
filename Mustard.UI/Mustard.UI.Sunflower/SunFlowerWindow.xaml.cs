@@ -5,12 +5,14 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 using static Mustard.Base.Toolset.WinAPI;
+using static Mustard.UI.Sunflower.SunFlowerCore;
 
 namespace Mustard.UI.Sunflower;
 
@@ -18,7 +20,7 @@ namespace Mustard.UI.Sunflower;
 public class SunFlowerWindow : Window
 {
     #region 依赖属性
-    public static DependencyProperty ColorThemeProperty;
+    //public static DependencyProperty ColorThemeProperty;
     public static DependencyProperty MenuBackgroundProperty;
     public static DependencyProperty MenuForegroundProperty;
     public static DependencyProperty TitleForegroundProperty;
@@ -31,7 +33,7 @@ public class SunFlowerWindow : Window
     #endregion
 
     #region 属性
-    public WindowColorTheme ColorTheme { get => (WindowColorTheme)GetValue(ColorThemeProperty); set => SetValue(ColorThemeProperty, value); }
+    //public WindowColorTheme ColorTheme { get => (WindowColorTheme)GetValue(ColorThemeProperty); set => SetValue(ColorThemeProperty, value); }
     public Brush MenuBackground { get => (Brush)GetValue(MenuBackgroundProperty); set => SetValue(MenuBackgroundProperty, value); }
     public Brush MenuForeground { get => (Brush)GetValue(MenuForegroundProperty); set => SetValue(MenuForegroundProperty, value); }
     public Brush TitleForeground { get => (Brush)GetValue(TitleForegroundProperty); set => SetValue(TitleForegroundProperty, value); }
@@ -44,25 +46,6 @@ public class SunFlowerWindow : Window
     #endregion
 
     #region 依赖属性更改事件
-    internal static void ColorThemeChanged
-        (DependencyObject o, DependencyPropertyChangedEventArgs e)
-    {
-        if (
-            e.NewValue is WindowColorTheme newTheme &&
-            e.OldValue is WindowColorTheme oldTheme &&
-            o is SunFlowerWindow window)
-        {
-            var olduri = new Uri($"pack://application:,,,/Mustard.UI.Sunflower;component/ColorThemes/{oldTheme}Theme.xaml");
-            var newuri = new Uri($"pack://application:,,,/Mustard.UI.Sunflower;component/ColorThemes/{newTheme}Theme.xaml");
-            var oldThemeFile = Application.Current.Resources.MergedDictionaries.ToList().Find(e => (e.Source == olduri));
-            if (oldThemeFile != null)
-            {
-                Application.Current.Resources.MergedDictionaries.Remove(oldThemeFile);
-            }
-            Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary { Source = newuri });
-        }
-    }
-
     internal static void WindowMaxButtonVisableChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
     {
         if (e.NewValue is bool visable && o is SunFlowerWindow window)
@@ -112,13 +95,12 @@ public class SunFlowerWindow : Window
     /// </summary>
     static SunFlowerWindow()
     {
-        SunFlowerCore.Init();
-
-        var appResources = Application.Current.Resources;
+        LoadConverters();
 
         // 添加Xaml到程序资源中
         FindAndAdd("pack://application:,,,/Mustard.UI.Sunflower;component/SunflowerWindow.xaml");
-        FindAndAdd("pack://application:,,,/Mustard.UI.Sunflower;component/ColorThemes/DarkTheme.xaml");
+
+        InitTheme();
 
         // 添加依赖属性
         var type = typeof(SunFlowerWindow);
@@ -131,16 +113,6 @@ public class SunFlowerWindow : Window
             var met = methodsw.FirstOrDefault(e => e.IsStatic && e.Name == $"{property.Name}Changed");
             PropertyChangedCallback call = (met == null ? null : (PropertyChangedCallback)met.CreateDelegate(typeof(PropertyChangedCallback)));
             RegistProperty(property, null, call);
-        }
-
-        // 查找并添加资源
-        void FindAndAdd(string sourcePath)
-        {
-            var uri = new Uri(sourcePath);
-            if (appResources.MergedDictionaries.ToList().Find(e => (e.Source == uri)) == null)
-            {
-                appResources.MergedDictionaries.Add(new ResourceDictionary { Source = uri });
-            }
         }
 
         // 注册资源属性
@@ -172,7 +144,23 @@ public class SunFlowerWindow : Window
         WindowMaxButtonVisable = true;
         WindowMinButtonVisable = true;
         SetResourceReference(StyleProperty, "SunFlowerWindowStyle");
-        Loaded += SunFlowerWindow_Loaded; ;
+        Loaded += SunFlowerWindow_Loaded;
+        PreviewMouseDown += (_, _) =>
+        {
+            Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Input, () =>
+            {
+                if (Keyboard.FocusedElement is TextBoxBase tbb && tbb.TemplatedParent is not ComboBox && Keyboard.FocusedElement != Mouse.Captured)
+                {
+                    Keyboard.ClearFocus();
+                    FocusManager.SetFocusedElement(this, this);
+                }
+                else if (Keyboard.FocusedElement is TextBoxBase cmTbb && cmTbb.TemplatedParent is ComboBox && Mouse.Captured == cmTbb)
+                {
+                    Keyboard.ClearFocus();
+                    FocusManager.SetFocusedElement(this, this);
+                }
+            });
+        };
     }
 
     private void SunFlowerWindow_Loaded(object sender, RoutedEventArgs e)

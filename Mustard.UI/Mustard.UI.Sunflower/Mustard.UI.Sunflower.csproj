@@ -33,8 +33,4 @@
   <ItemGroup>
     <Resource Include="Resources\Logo.png" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ExtControls\" />
-  </ItemGroup>
 </Project>

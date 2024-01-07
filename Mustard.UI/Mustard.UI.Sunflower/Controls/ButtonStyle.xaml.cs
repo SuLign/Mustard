@@ -57,12 +57,13 @@ public static class ButtonStyle
             typeof(Geometry),
             typeof(ButtonStyle),
             new PropertyMetadata(null));
+
     public static DependencyProperty ButtonIconFillProperty =
-    DependencyProperty.RegisterAttached(
-        "ButtonIconFill",
-        typeof(Brush),
-        typeof(ButtonStyle),
-        new PropertyMetadata(null));
+        DependencyProperty.RegisterAttached(
+            "ButtonIconFill",
+            typeof(Brush),
+            typeof(ButtonStyle),
+            new PropertyMetadata(null));
 
 
     // Mouse Over

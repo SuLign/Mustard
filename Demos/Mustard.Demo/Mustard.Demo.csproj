@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Mustard.Base\Mustard.Base.Core\Mustard.Base.Core.csproj" />
+    <ProjectReference Include="..\..\Mustard.UIExtension\Mustard.UIExtension.Dx11Base\Mustard.UIExtension.Dx11Basae.csproj" />
     <ProjectReference Include="..\..\Mustard.UIExtension\Mustard.UIExtension.PlotControl\Mustard.UIExtension.PlotControl.csproj" />
     <ProjectReference Include="..\..\Mustard.UI\Mustard.UI.Sunflower\Mustard.UI.Sunflower.csproj" />
   </ItemGroup>

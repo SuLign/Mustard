@@ -19,6 +19,14 @@ namespace Mustard.Base.Toolset
         public const int SC_MOVE = 0xF010;
         public const int HTCAPTION = 0x0002;
         public const int WM_HOTKEY = 0x312;
+        public struct RECT
+        {
+            public int Left;
+            public int Top;
+            public int Right;
+            public int Bottom;
+        }
+
 
         public enum VirtualKeyStates : int
         {
@@ -313,6 +321,9 @@ namespace Mustard.Base.Toolset
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool SetForegroundWindow(IntPtr hWnd);
+
+        [DllImport("user32", SetLastError = true)]
+        public static extern bool GetWindowRect(IntPtr handle, ref RECT rect);
 
         [Flags]
         public enum KeyModifiers
