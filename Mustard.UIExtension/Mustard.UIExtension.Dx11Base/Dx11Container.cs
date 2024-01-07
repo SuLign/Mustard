@@ -50,22 +50,24 @@ public class Dx11Container : HwndHost
     private IntPtr dx11HostHandle = IntPtr.Zero;
     private IntPtr dx11CoreHandle;
     private bool needRender;
+    private int cnt = 1000;
 
     public Dx11Container()
     {
         Loaded += Dx11ContainerLoaded;
         CompositionTarget.Rendering += CompositionTargetRendering;
-        //SizeChanged += delegate { needRender = false; };
     }
 
     private void CompositionTargetRendering(object sender, EventArgs e)
     {
         if (needRender)
         {
-            Render(dx11CoreHandle);
+            if (cnt-- > 0)
+            {
+                Render(dx11CoreHandle);
+            }
         }
         needRender = true;
-        //InvalidateVisual();
     }
 
     private void Dx11ContainerLoaded(object sender, RoutedEventArgs e)
@@ -75,25 +77,18 @@ public class Dx11Container : HwndHost
 
     protected override HandleRef BuildWindowCore(HandleRef hwndParent)
     {
-        var owner = ((HwndSource)PresentationSource.FromVisual(this)).Handle;
-        var parameters = new HwndSourceParameters("test")
-        {
-            WindowStyle = WS_CHILD /*| WS_VISIBLE | LBS_NOTIFY*/ | WS_CLIPCHILDREN,
-            ParentWindow = owner,
-        };
-        var source = new HwndSource(parameters);
-        //dx11HostHandle = CreateWindowEx(
-        //    0, "static", "",
-        //    WS_CHILD /*| WS_VISIBLE | LBS_NOTIFY*/ | WS_CLIPCHILDREN,
-        //    0, 0,
-        //    (int)ActualWidth, (int)ActualHeight,
-        //    hwndParent.Handle,
-        //    (IntPtr)HOST_ID,
-        //    IntPtr.Zero,
-        //    0);
+        dx11HostHandle = CreateWindowEx(
+            0, "static", "",
+            WS_CHILD | WS_CLIPCHILDREN,
+            0, 0,
+            (int)ActualWidth, (int)ActualHeight,
+            hwndParent.Handle,
+            (IntPtr)HOST_ID,
+            IntPtr.Zero,
+            0);
         dx11CoreHandle = CreateHandle();
-        InitD3D(dx11CoreHandle, source.Handle);
-        return new HandleRef(this, source.Handle);
+        InitD3D(dx11CoreHandle, dx11HostHandle);
+        return new HandleRef(this, dx11HostHandle);
     }
 
     protected override void DestroyWindowCore(HandleRef hwnd)
@@ -102,6 +97,7 @@ public class Dx11Container : HwndHost
 
     protected override void OnRender(DrawingContext drawingContext)
     {
-        //needRender = false;
+        needRender = false;
+        cnt = 1;
     }
 }
