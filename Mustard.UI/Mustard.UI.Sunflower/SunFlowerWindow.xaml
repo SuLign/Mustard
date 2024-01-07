@@ -19,10 +19,10 @@
         <ResourceDictionary Source="pack://application:,,,/Mustard.UI.Sunflower;component/Controls/GridViewColumnHeaderStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Mustard.UI.Sunflower;component/Controls/TreeViewStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Mustard.UI.Sunflower;component/Controls/TreeViewItemStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Mustard.UI.Sunflower;component/Controls/TabControlStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
     <Style x:Key="SunFlowerWindowStyle" TargetType="{x:Type local:SunFlowerWindow}">
         <Setter Property="Foreground" Value="{DynamicResource Major_Foreground}" />
-        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
         <Setter Property="TitleForeground" Value="{DynamicResource Major_Foreground}" />
         <Setter Property="MenuForeground" Value="{DynamicResource Sub2_Foreground}" />
         <Setter Property="FontFamily" Value="Microsoft Yahei" />

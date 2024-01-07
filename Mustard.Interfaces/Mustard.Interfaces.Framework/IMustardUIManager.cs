@@ -25,6 +25,10 @@ namespace Mustard.Interfaces.Framework
         /// <returns>窗口</returns>
         Window GetEntryWindow(string windowName = null);
 
+        /// <summary>
+        /// 初始化UI管理器
+        /// </summary>
+        /// <returns></returns>
         bool Initialize();
 
         /// <summary>

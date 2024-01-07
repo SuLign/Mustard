@@ -1,0 +1,132 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:st="clr-namespace:JinWu.EasyStyle">
+    <Style x:Key="FocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle
+                        Margin="2"
+                        SnapsToDevicePixels="true"
+                        Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                        StrokeDashArray="1 2"
+                        StrokeThickness="1" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="{x:Type TabItem}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+        <Setter Property="Foreground" Value="{DynamicResource Major_Foreground}" />
+        <Setter Property="Background" Value="{DynamicResource TabItem.Static.Background}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Default_ContentPanel_Border}" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TabItem}">
+                    <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition x:Name="columnDef1" Width="auto" />
+                            <ColumnDefinition x:Name="columnDef2" Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <Rectangle
+                            Grid.RowSpan="2"
+                            Grid.ColumnSpan="2"
+                            Fill="Transparent" />
+                        <Border
+                            x:Name="mainBorder"
+                            Grid.RowSpan="2"
+                            Grid.ColumnSpan="2"
+                            Margin="0"
+                            Background="{DynamicResource Default_ContentPanel_Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="1,1,1,1" />
+                        <Rectangle
+                            Name="selMark"
+                            Grid.RowSpan="2"
+                            Grid.ColumnSpan="2"
+                            Fill="Transparent" />
+                        <Path
+                            x:Name="tabItemIcon"
+                            Width="{TemplateBinding FontSize}"
+                            Margin="5,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Data="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(st:TabItemStyle.TabItemIcon)}"
+                            Fill="{DynamicResource Default_ICON_Normal_Background}"
+                            Stretch="Uniform"
+                            Visibility="Visible" />
+                        <ContentPresenter
+                            x:Name="contentPresenter"
+                            Margin="{TemplateBinding Padding}"
+                            HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                            VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                            ContentSource="Header"
+                            Cursor="Hand"
+                            Focusable="False"
+                            RecognizesAccessKey="True"
+                            RenderOptions.BitmapScalingMode="HighQuality"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="st:TabItemStyle.TabItemIcon" Value="{x:Null}">
+                            <Setter TargetName="tabItemIcon" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="TabStripPlacement" Value="Left">
+                            <Setter TargetName="contentPresenter" Property="Grid.Row" Value="1" />
+                            <Setter TargetName="contentPresenter" Property="SnapsToDevicePixels" Value="True" />
+                            <Setter TargetName="contentPresenter" Property="Grid.Column" Value="0" />
+                            <Setter TargetName="selMark" Property="Width" Value="2" />
+                            <Setter TargetName="selMark" Property="HorizontalAlignment" Value="Left" />
+                            <Setter TargetName="columnDef1" Property="Width" Value="*" />
+                            <Setter TargetName="columnDef2" Property="Width" Value="0" />
+                            <Setter TargetName="contentPresenter" Property="LayoutTransform">
+                                <Setter.Value>
+                                    <RotateTransform Angle="-90" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="TabStripPlacement" Value="Right">
+                            <Setter TargetName="contentPresenter" Property="Grid.Row" Value="1" />
+                            <Setter TargetName="contentPresenter" Property="Grid.Column" Value="0" />
+                            <Setter TargetName="selMark" Property="Width" Value="2" />
+                            <Setter TargetName="selMark" Property="HorizontalAlignment" Value="Right" />
+                            <Setter TargetName="columnDef1" Property="Width" Value="0" />
+                            <Setter TargetName="columnDef2" Property="Width" Value="*" />
+                        </Trigger>
+                        <Trigger Property="TabStripPlacement" Value="Top">
+                            <Setter TargetName="contentPresenter" Property="Grid.Row" Value="0" />
+                            <Setter TargetName="contentPresenter" Property="Grid.Column" Value="1" />
+                            <Setter TargetName="selMark" Property="Height" Value="2" />
+                            <Setter TargetName="selMark" Property="VerticalAlignment" Value="Top" />
+                        </Trigger>
+                        <Trigger Property="TabStripPlacement" Value="Right">
+                            <Setter TargetName="contentPresenter" Property="Grid.Row" Value="0" />
+                            <Setter TargetName="contentPresenter" Property="Grid.Column" Value="1" />
+                            <Setter TargetName="selMark" Property="Height" Value="2" />
+                            <Setter TargetName="selMark" Property="VerticalAlignment" Value="Bottom" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="tabItemIcon" Property="Fill" Value="{DynamicResource Default_ICON_Focus_Background}" />
+                            <Setter TargetName="selMark" Property="Fill" Value="{DynamicResource Default_TabSelect_Border}" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="mainBorder" Property="Background" Value="{DynamicResource Default_ContentPanel_Border}" />
+                            <Setter TargetName="tabItemIcon" Property="Fill" Value="{DynamicResource Default_ICON_Focus_Background}" />
+                            <Setter TargetName="selMark" Property="Fill" Value="{DynamicResource Default_TabSelect_Border}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{DynamicResource TabItem.Disabled.Foreground}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

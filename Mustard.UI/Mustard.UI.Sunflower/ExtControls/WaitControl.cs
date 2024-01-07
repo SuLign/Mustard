@@ -11,7 +11,6 @@ using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Windows.Shapes;
 using System.Windows.Threading;
-
 using static Mustard.Base.Toolset.WinAPI;
 
 namespace Mustard.UI.Sunflower.ExControls;
@@ -209,12 +208,10 @@ public class WaitControl : IDisposable
         Color sub1Background = default;
         Color sub3Background = default;
 
-        Application.Current.Dispatcher.Invoke(() =>
-        {
-            majorBackground = ((SolidColorBrush)(Application.Current.FindResource("Major_Background") ?? new SolidColorBrush(Color.FromArgb(0xDF, 0x1C, 0x4F, 0x81)))).Color;
-            sub1Background = ((SolidColorBrush)(Application.Current.FindResource("Sub1_Background") ?? new SolidColorBrush(Color.FromArgb(0xFF, 0x0C, 0x1F, 0x41)))).Color;
-            sub3Background = ((SolidColorBrush)(Application.Current.FindResource("Sub3_Background") ?? new SolidColorBrush(Color.FromArgb(0xFF, 0x0C, 0x1F, 0x41)))).Color;
-        });
+        majorBackground = (Color)Application.Current.FindResource("Major.Background.Color");
+        sub1Background = ((SolidColorBrush)(Application.Current.FindResource("Sub1_Background") ?? new SolidColorBrush(Color.FromArgb(0xFF, 0x0C, 0x1F, 0x41)))).Color;
+        sub3Background = ((SolidColorBrush)(Application.Current.FindResource("Sub3_Background") ?? new SolidColorBrush(Color.FromArgb(0xFF, 0x0C, 0x1F, 0x41)))).Color;
+
 
         LinearGradientBrush gradientBrush = new LinearGradientBrush();
         gradientBrush.GradientStops.Add(new GradientStop { Color = majorBackground, Offset = 0 });

@@ -38,6 +38,23 @@ void DX11Chart::InitD3D()
 	D3D11_VIEWPORT viewport;
 	ZeroMemory(&viewport, sizeof(D3D11_VIEWPORT));
 
+	auto shader = 
+		"struct VOut"
+		"{"
+		"	float4 position : SV_POSITION;"
+		"	float4 color : COLOR;"
+		"};"
+		"VOut VShader(float4 position : POSITION, float4 color : COLOR)"
+		"{"
+		"	VOut output;"
+		"	output.position = position;"
+		"	output.color = color;"
+		"	return output;"
+		"}"
+		"float4 PShader(float4 position : SV_POSITION, float4 color : COLOR) : SV_TARGET"
+		"{"
+		"	return color;"
+		"}";
 	viewport.TopLeftX = 0;
 	viewport.TopLeftY = 0;
 	viewport.Width = 800;
@@ -50,5 +67,6 @@ void DX11Chart::Render()
 {
 	float color[4]{ 80.0f / 255,0.0f,0.0f,1.0f };
 	d3d11DeviceContext->ClearRenderTargetView(d3d11RenderTargetView, color);
+	//d3d11DeviceContext->Begin()
 	d3d11SwapChain->Present(0, 0);
 }

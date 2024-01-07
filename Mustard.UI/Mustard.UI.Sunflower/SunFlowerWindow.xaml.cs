@@ -16,7 +16,6 @@ using static Mustard.UI.Sunflower.SunFlowerCore;
 
 namespace Mustard.UI.Sunflower;
 
-
 public class SunFlowerWindow : Window
 {
     #region 依赖属性
@@ -99,9 +98,7 @@ public class SunFlowerWindow : Window
 
         // 添加Xaml到程序资源中
         FindAndAdd("pack://application:,,,/Mustard.UI.Sunflower;component/SunflowerWindow.xaml");
-
         InitTheme();
-
         // 添加依赖属性
         var type = typeof(SunFlowerWindow);
         var staticFields = type.GetFields();

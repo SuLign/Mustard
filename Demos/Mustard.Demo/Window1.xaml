@@ -16,6 +16,16 @@
             <Button Height="30" Click="Button_Click">取色器</Button>
             <Button Height="30" Click="ShowWaitControl">等待弹窗</Button>
         </StackPanel>-->
-        <dx11basae:Dx11Container />
+        <TabControl>
+            <TabItem Header="弹窗显示">
+                <StackPanel>
+                    <Button Height="30" Click="Button_Click">取色器</Button>
+                    <Button Height="30" Click="ShowWaitControl">等待弹窗</Button>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="DX11Container">
+                <dx11basae:Dx11Container />
+            </TabItem>
+        </TabControl>
     </Grid>
 </sunflower:SunFlowerWindow>

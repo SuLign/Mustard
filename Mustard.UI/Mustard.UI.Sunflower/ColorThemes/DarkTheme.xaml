@@ -76,6 +76,10 @@
     <Color x:Key="Title.Static.Background">#861B2D</Color>
     <Color x:Key="Button.Static.Background.Color">#3C7FB1</Color>
 
+    <!--  TabControl  -->
+    <Color x:Key="TabItem.Header.Foreground.Color">#C4E5F6</Color>
+    <SolidColorBrush x:Key="TabItem.Header.Foreground" Color="{StaticResource TabItem.Header.Foreground.Color}" />
+
     <!--  MessageBox Image Color  -->
     <SolidColorBrush x:Key="MessageBoxImage_Warning" Color="#f0f000" />
     <SolidColorBrush x:Key="MessageBoxImage_Question" Color="#9E4957" />

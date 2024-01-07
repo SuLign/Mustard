@@ -62,7 +62,7 @@ public class Dx11Container : HwndHost
     {
         if (needRender)
         {
-            if (cnt-- > 0)
+            if (IsVisible && cnt-- > 0)
             {
                 Render(dx11CoreHandle);
             }
@@ -98,6 +98,6 @@ public class Dx11Container : HwndHost
     protected override void OnRender(DrawingContext drawingContext)
     {
         needRender = false;
-        cnt = 1;
+        cnt = 20;
     }
 }

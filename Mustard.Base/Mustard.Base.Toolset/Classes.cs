@@ -9,95 +9,61 @@ namespace Mustard.Base.Toolset;
 
 public class Classes
 {
-
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    private IList<Assembly> _assemblies;
-
-    private Classes()
+    public static bool LoadTypesFromCurrentAssembly<TInstance, TAttr>(out List<Tuple<TAttr, Type>> outTypes) where TAttr : Attribute
     {
-        _assemblies = new List<Assembly>();
-    }
-
-    public static Classes FromDynamicLinkLibrary(string dllPath)
-    {
-        if (!File.Exists(dllPath)) return null;
-        var assembly = Assembly.LoadFrom(dllPath);
-        return FromAssembly(assembly);
-    }
-
-    public static Classes FromAssembly(Assembly assembly)
-    {
-        Classes classes = new Classes();
-        classes._assemblies.Add(assembly);
-        return classes;
-    }
-
-    public static Classes FromThisAssembly()
-    {
-        var assembly = Assembly.GetCallingAssembly();
-        return FromAssembly(assembly);
-    }
-
-    public static Classes FromEntryPointAssembly()
-    {
+        outTypes = null;
         var assembly = Assembly.GetEntryAssembly();
-        return FromAssembly(assembly);
-    }
-
-    public bool AddAssemblyFromFile(string path)
-        => AddAssembly(Assembly.LoadFrom(path));
-
-    public bool AddAssemblyFromEntryPoint()
-        => AddAssembly(Assembly.GetEntryAssembly());
-
-    public bool AddAssembly(Assembly assembly)
-    {
-        if (assembly == null) return false;
-        if (_assemblies.Contains(assembly)) return true;
-        _assemblies.Add(assembly);
-        return true;
-    }
-
-    public Type[] BasedOn<TParent, TAttribute>
-        () where TAttribute : Attribute
-        => BasedOn<TAttribute>(typeof(TParent));
-
-    public Type[] BasedOn<TParent, TAttribute>
-        (Func<TAttribute, bool> attributeFilter) where TAttribute : Attribute
-        => BasedOn(typeof(TParent), attributeFilter);
-
-    public Type[] BasedOn<TAttribute>(Type type) where TAttribute : Attribute
-        => BasedOn<TAttribute>(type, null);
-
-    public Type[] BasedOn<TAttribute>
-        (Type type, Func<TAttribute, bool> attributeFilter) where TAttribute : Attribute
-    {
-        var ret = new List<Type>();
-        _assemblies.ToList().ForEach(e =>
+        var types = assembly.GetTypes();
+        foreach (var item in types)
         {
-            var types = e.GetTypes();
-            foreach (var typeItem in types)
+            if (item.IsClass)
             {
-                if (typeItem.IsClass)
+                var attr = item.GetCustomAttribute<TAttr>();
+                if (attr != null)
                 {
-                    var attr = typeItem.GetCustomAttribute<TAttribute>();
-                    if (attr != null)
+                    try
                     {
-                        if (attributeFilter != null) if (!attributeFilter(attr)) continue;
-                        ret.Add(typeItem);
+                        if (outTypes == null) outTypes = new List<Tuple<TAttr, Type>>();
+                        outTypes.Add(new Tuple<TAttr, Type>(attr, item));
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"{DateTime.Now.ToString("yyyy - MM - dd HH - mm - ss - fff")}: 加载库内容失败【{ex.Message}】");
+                        continue;
                     }
                 }
             }
-        });
-        return ret.ToArray();
+        }
+        return (outTypes != null);
     }
 
-    private IEnumerable<Type> GetTopLevelInterfaces(Type type)
+    public static bool LoadMultiTypeFromDll<TAttr>(string dllPath, out List<Tuple<TAttr, Type>> outTypes, out Assembly library) where TAttr : Attribute
     {
-        var interfaces = type.GetInterfaces();
-        var topLevel = new List<Type>(interfaces);
-        foreach (var @interface in interfaces)
-            foreach (var parent in @interface.GetInterfaces()) topLevel.Remove(parent);
-        return topLevel;
+        outTypes = null;
+        library = null;
+        if (!File.Exists(dllPath)) return false;
+        library = Assembly.LoadFile(dllPath);
+        var types = library.GetTypes();
+        foreach (var item in types)
+        {
+            if (item.IsClass)
+            {
+                var attr = item.GetCustomAttribute<TAttr>();
+                if (attr != null)
+                {
+                    try
+                    {
+                        if (outTypes == null) outTypes = new List<Tuple<TAttr, Type>>();
+                        outTypes.Add(new Tuple<TAttr, Type>(attr, item));
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"{DateTime.Now.ToString("yyyy - MM - dd HH - mm - ss - fff")}: 加载库内容失败【{ex.Message}】");
+                        continue;
+                    }
+                }
+            }
+        }
+        return (outTypes != null);
     }
 }
