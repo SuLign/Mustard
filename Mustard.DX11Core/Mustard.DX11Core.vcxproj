@@ -161,6 +161,7 @@
   <ItemGroup>
     <ClInclude Include="DX11Chart.h" />
     <ClInclude Include="DX11PCH.h" />
+    <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DX11Chart.cpp" />

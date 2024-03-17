@@ -22,6 +22,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.DependencyValidation.Analyzers" Version="0.11.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Mustard.Base\Mustard.Base.Core\Mustard.Base.Core.csproj" />
     <ProjectReference Include="..\..\Mustard.UIExtension\Mustard.UIExtension.Dx11Base\Mustard.UIExtension.Dx11Basae.csproj" />
     <ProjectReference Include="..\..\Mustard.UIExtension\Mustard.UIExtension.PlotControl\Mustard.UIExtension.PlotControl.csproj" />

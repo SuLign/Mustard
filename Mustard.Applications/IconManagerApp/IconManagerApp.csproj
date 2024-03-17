@@ -40,4 +40,8 @@
   <ItemGroup>
     <Folder Include="SS\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.DependencyValidation.Analyzers" Version="0.11.0" />
+  </ItemGroup>
 </Project>

@@ -50,12 +50,21 @@ public class Dx11Container : HwndHost
     private IntPtr dx11HostHandle = IntPtr.Zero;
     private IntPtr dx11CoreHandle;
     private bool needRender;
-    private int cnt = 1000;
+    private int cnt = 20;
 
     public Dx11Container()
     {
         Loaded += Dx11ContainerLoaded;
         CompositionTarget.Rendering += CompositionTargetRendering;
+        IsVisibleChanged += Dx11Container_IsVisibleChanged;
+    }
+
+    private void Dx11Container_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+    {
+        if (IsVisible)
+        {
+            cnt = 20;
+        }
     }
 
     private void CompositionTargetRendering(object sender, EventArgs e)

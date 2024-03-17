@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -94,6 +95,10 @@ public class SunFlowerWindow : Window
     /// </summary>
     static SunFlowerWindow()
     {
+        if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
+        {
+            return;
+        }
         LoadConverters();
 
         // 添加Xaml到程序资源中
@@ -137,6 +142,10 @@ public class SunFlowerWindow : Window
 
     public SunFlowerWindow()
     {
+        if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
+        {
+            return;
+        }
         WindowClsButtonVisable = true;
         WindowMaxButtonVisable = true;
         WindowMinButtonVisable = true;

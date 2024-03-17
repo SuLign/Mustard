@@ -42,6 +42,10 @@
     <None Remove="System.Security.AccessControl.dll" />
     <None Remove="System.Security.Principal.Windows.dll" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Microsoft.DependencyValidation.Analyzers" Version="0.11.0" />
+  </ItemGroup>
 
   <ItemGroup>
     <Reference Include="Microsoft.Win32.Registry">

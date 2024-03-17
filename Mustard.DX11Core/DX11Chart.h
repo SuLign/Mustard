@@ -1,5 +1,6 @@
 #pragma once
 #include "DX11PCH.h"
+#include "Vertex.h"
 
 class DX11Chart
 {

@@ -67,6 +67,21 @@ void DX11Chart::Render()
 {
 	float color[4]{ 80.0f / 255,0.0f,0.0f,1.0f };
 	d3d11DeviceContext->ClearRenderTargetView(d3d11RenderTargetView, color);
+
+	D3D11_BUFFER_DESC bd = {};
+	bd.Usage = D3D11_USAGE_DEFAULT;
+	bd.ByteWidth = sizeof(Vertex) * 3; // 一个三角形有3个顶点
+	bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+	bd.CPUAccessFlags = 0;
+	D3D11_SUBRESOURCE_DATA InitData = {};
+	//InitData.pSysMem = vertices; // vertices是预先定义的包含三角形数据的数组
+	ID3D11Buffer* vertexBuffer;
+	d3d11Device->CreateBuffer(&bd, &InitData, &vertexBuffer);
+
+
+
+	d3d11DeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	d3d11DeviceContext->Draw(3, 0); // 绘制3个顶点，开始于索引0
 	//d3d11DeviceContext->Begin()
 	d3d11SwapChain->Present(0, 0);
 }

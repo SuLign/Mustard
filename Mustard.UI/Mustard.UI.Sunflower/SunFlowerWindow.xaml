@@ -74,15 +74,15 @@
                                             <!--  6  -->
                                             <ColumnDefinition Width="auto" />
                                             <!--  7  -->
-                                            <ColumnDefinition Width="1" />
+                                            <ColumnDefinition Width="10" />
                                             <!--  8  -->
                                             <ColumnDefinition Width="auto" />
                                             <!--  9  -->
-                                            <ColumnDefinition Width="1" />
+                                            <ColumnDefinition Width="10" />
                                             <!--  10  -->
                                             <ColumnDefinition Width="auto" />
                                             <!--  11  -->
-                                            <ColumnDefinition Width="1" />
+                                            <ColumnDefinition Width="10" />
                                         </Grid.ColumnDefinitions>
                                         <Rectangle Grid.ColumnSpan="100" Fill="Transparent" />
                                         <Border
@@ -176,7 +176,7 @@
                                             SnapsToDevicePixels="True">
                                             <Path
                                                 x:Name="btnMaximizeIcon"
-                                                Margin="1,0"
+                                                Margin="1"
                                                 VerticalAlignment="Center"
                                                 Fill="{DynamicResource Major_Foreground}"
                                                 SnapsToDevicePixels="True"
