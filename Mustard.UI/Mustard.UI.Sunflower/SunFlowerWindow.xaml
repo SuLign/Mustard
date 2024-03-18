@@ -89,19 +89,18 @@
                                             x:Name="captionBorder"
                                             Grid.ColumnSpan="3"
                                             Background="{DynamicResource Major_Background}"
-                                            BorderBrush="{DynamicResource Sub2_Background}"
-                                            BorderThickness="0,0,0,1" />
+                                            BorderBrush="{DynamicResource Sub2_Background}" />
                                         <Path
                                             x:Name="captionPath"
                                             Grid.Column="4"
                                             Data="M0,10 10,0 0,0"
                                             Fill="{DynamicResource Major_Background}"
                                             Stretch="Fill" />
-                                        <Path
+                                        <!--<Path
                                             Grid.Column="4"
                                             Data="M0,10 10,0"
                                             Stretch="Fill"
-                                            Stroke="{DynamicResource Sub2_Background}" />
+                                            Stroke="{DynamicResource Sub2_Background}" />-->
                                         <Image
                                             x:Name="imgIcon"
                                             Width="15"
@@ -204,10 +203,7 @@
                                         </Button>
                                     </Grid>
                                 </Border>
-                                <Border
-                                    Grid.Row="1"
-                                    BorderBrush="#30FFFFFF"
-                                    BorderThickness=".5,0,.5,.5">
+                                <Border Grid.Row="1">
                                     <Grid>
                                         <ContentPresenter />
                                     </Grid>

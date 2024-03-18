@@ -161,12 +161,14 @@
   <ItemGroup>
     <ClInclude Include="DX11Chart.h" />
     <ClInclude Include="DX11PCH.h" />
+    <ClInclude Include="ShaderCompiler.h" />
     <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DX11Chart.cpp" />
     <ClCompile Include="DX11PCH.cpp" />
     <ClCompile Include="ExternHeader.cpp" />
+    <ClCompile Include="ShaderCompiler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ExternHeader.h" />

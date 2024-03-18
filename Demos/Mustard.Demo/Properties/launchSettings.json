@@ -2,7 +2,7 @@
   "profiles": {
     "Mustard.Demo": {
       "commandName": "Project",
-      "nativeDebugging": false
+      "nativeDebugging": true
     }
   }
 }
