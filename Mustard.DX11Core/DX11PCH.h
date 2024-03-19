@@ -5,7 +5,6 @@
 
 // DirectX includes
 #include <d3d11_4.h>
-#include <D3DX11.h>
 #include <d3dcompiler.h>
 #include <DirectXMath.h>
 #include <DirectXColors.h>

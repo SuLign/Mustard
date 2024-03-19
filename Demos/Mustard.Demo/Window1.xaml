@@ -24,7 +24,17 @@
                 </StackPanel>
             </TabItem>
             <TabItem Header="DX11Container">
-                <dx11basae:Dx11Container />
+                <Grid>
+                    <dx11basae:Dx11Container Margin="50">
+                        <dx11basae:Dx11Container.ContextMenu>
+                            <ContextMenu IsOpen="True">
+                                <MenuItem Header="1" />
+                                <MenuItem Header="2" />
+                            </ContextMenu>
+                        </dx11basae:Dx11Container.ContextMenu>
+                    </dx11basae:Dx11Container>
+                    <Border Background="AliceBlue" />
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>
