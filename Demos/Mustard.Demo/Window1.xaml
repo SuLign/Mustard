@@ -25,14 +25,7 @@
             </TabItem>
             <TabItem Header="DX11Container">
                 <Grid>
-                    <dx11basae:Dx11Container Margin="50">
-                        <dx11basae:Dx11Container.ContextMenu>
-                            <ContextMenu IsOpen="True">
-                                <MenuItem Header="1" />
-                                <MenuItem Header="2" />
-                            </ContextMenu>
-                        </dx11basae:Dx11Container.ContextMenu>
-                    </dx11basae:Dx11Container>
+                    <dx11basae:Dx11Container Margin="50" />
                     <Border Background="AliceBlue" />
                 </Grid>
             </TabItem>

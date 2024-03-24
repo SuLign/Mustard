@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -84,6 +85,10 @@ public class Dx11Container : HwndHost
 
     public Dx11Container()
     {
+        if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
+        {
+            return;
+        }
         Loaded += Dx11ContainerLoaded;
         CompositionTarget.Rendering += CompositionTargetRendering;
         IsVisibleChanged += Dx11Container_IsVisibleChanged;
@@ -99,6 +104,10 @@ public class Dx11Container : HwndHost
 
     private void CompositionTargetRendering(object sender, EventArgs e)
     {
+        if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
+        {
+            return;
+        }
         if (needRender)
         {
             if (IsVisible && cnt-- > 0)
@@ -116,6 +125,10 @@ public class Dx11Container : HwndHost
 
     protected override HandleRef BuildWindowCore(HandleRef hwndParent)
     {
+        if (DesignerProperties.GetIsInDesignMode(new DependencyObject()))
+        {
+            return default;
+        }
         dx11HostHandle = CreateWindowEx(
             0, "static", "",
             WS_CHILD | WS_VISIBLE,

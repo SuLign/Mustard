@@ -28,9 +28,4 @@
     <ProjectReference Include="..\..\..\Mustard.UI\Mustard.UI.MVVM\Mustard.UI.MVVM.csproj" />
     <ProjectReference Include="..\..\..\Mustard.UI\Mustard.UI.Sunflower\Mustard.UI.Sunflower.csproj" />
   </ItemGroup>
-  <ItemGroup Label="DTDemo">
-    <None Include="DTDemo.mlnet">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
 </Project>

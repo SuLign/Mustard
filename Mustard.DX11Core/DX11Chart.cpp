@@ -74,7 +74,7 @@ void DX11Chart::InitD3D()
 {
 	dx11ShaderCompiler = new DX11ShaderCompiler;
 	dx11ShaderCompiler->SetDevice(d3d11Device);
-#if 0
+#if 1
 	auto shader =
 		"struct VS_Input"
 		"{"
@@ -189,8 +189,12 @@ void DX11Chart::Render()
 		d3d11FrameBuffer->Release();
 
 	}
-	float color[4]{ 80.0f / 255,0.0f,0.0f,1.0f };
-	d3d11DeviceContext->ClearRenderTargetView(d3d11RenderTargetView, color);
+
+	if (d3d11RenderTargetView != nullptr)
+	{
+		float color[4]{ 80.0f / 255,0.0f,0.0f,1.0f };
+		d3d11DeviceContext->ClearRenderTargetView(d3d11RenderTargetView, color);
+	}
 
 	D3D11_VIEWPORT viewport = { 0.0f, 0.0f, (FLOAT)w, (FLOAT)h, 0.0f, 1.0f };
 	d3d11DeviceContext->RSSetViewports(1, &viewport);
