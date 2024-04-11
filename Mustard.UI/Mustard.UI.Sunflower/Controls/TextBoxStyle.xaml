@@ -38,6 +38,7 @@
                             <ContentControl
                                 x:Name="prefix"
                                 Grid.Column="0"
+                                VerticalAlignment="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(st:TextBoxStyle.PrefixVerticalAlignment)}"
                                 Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(st:TextBoxStyle.Prefix)}"
                                 Opacity="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(st:TextBoxStyle.PrefixOpacity)}" />
                             <ScrollViewer
@@ -50,6 +51,7 @@
                                 x:Name="superfix"
                                 Grid.Column="2"
                                 Margin="0,0,10,0"
+                                VerticalAlignment="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(st:TextBoxStyle.SuperfixVerticalAlignment)}"
                                 Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(st:TextBoxStyle.Superfix)}"
                                 Opacity="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(st:TextBoxStyle.SuperfixOpacity)}" />
                         </Grid>

@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <TargetFramework>net48</TargetFramework>
+    <OutputPath>$(SolutionDir)bin\$(Configuration)\</OutputPath>
+    <Platforms>AnyCPU;x64</Platforms>
+    <LangVersion>preview</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <PlatformTargets>AnyCPU;x64</PlatformTargets>
+    <ApplicationIcon>Mustard.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="Mustard.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.DependencyValidation.Analyzers" Version="0.11.0" />
+    <PackageReference Include="Microsoft.ML" Version="3.0.0-preview.23266.6" />
+    <PackageReference Include="Microsoft.ML.Vision" Version="3.0.0-preview.23266.6" />
+    <PackageReference Include="SciSharp.TensorFlow.Redist" Version="2.3.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Mustard.Base\Mustard.Base.Attributes\Mustard.Base.Attributes.csproj" />
+    <ProjectReference Include="..\..\..\Mustard.Base\Mustard.Base.BaseDefinitions\Mustard.Base.BaseDefinitions.csproj" />
+    <ProjectReference Include="..\..\..\Mustard.Base\Mustard.Base.Core\Mustard.Base.Core.csproj" />
+    <ProjectReference Include="..\..\..\Mustard.Base\Mustard.Base.Toolset\Mustard.Base.Toolset.csproj" />
+    <ProjectReference Include="..\..\..\Mustard.Interfaces\Mustard.Interfaces.Framework\Mustard.Interfaces.Framework.csproj" />
+    <ProjectReference Include="..\..\..\Mustard.UI\Mustard.UI.MVVM\Mustard.UI.MVVM.csproj" />
+    <ProjectReference Include="..\..\..\Mustard.UI\Mustard.UI.Sunflower\Mustard.UI.Sunflower.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+</Project>

@@ -58,8 +58,10 @@ public class MustardMessageBox
         {
             BorderThickness = new Thickness(1, 5, 1, 1),
         };
-        border.SetResourceReference(Border.BackgroundProperty, "Major_Background");
-        border.SetResourceReference(Border.BorderBrushProperty, "Border_BorderBrush");
+        var majorBackgroundColor = (Color)Application.Current.FindResource("Major.Background.Color");
+        var borderBackground = new SolidColorBrush(Color.FromRgb(0x1C, 0x4F, 0x81)) { Opacity = .8 };
+        border.Background = new SolidColorBrush(majorBackgroundColor);
+        border.BorderBrush = borderBackground;
         displayPopup.Child = border;
 
         var hostGrid = new Grid();

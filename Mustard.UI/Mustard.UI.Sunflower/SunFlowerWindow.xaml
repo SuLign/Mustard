@@ -51,7 +51,7 @@
                         <AdornerDecorator>
                             <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="26" />
+                                    <RowDefinition Height="40" />
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="auto" />
                                     <RowDefinition Height="auto" />
@@ -74,11 +74,11 @@
                                             <!--  6  -->
                                             <ColumnDefinition Width="auto" />
                                             <!--  7  -->
-                                            <ColumnDefinition Width="10" />
+                                            <ColumnDefinition Width="0" />
                                             <!--  8  -->
                                             <ColumnDefinition Width="auto" />
                                             <!--  9  -->
-                                            <ColumnDefinition Width="10" />
+                                            <ColumnDefinition Width="0" />
                                             <!--  10  -->
                                             <ColumnDefinition Width="auto" />
                                             <!--  11  -->
@@ -105,17 +105,17 @@
                                             x:Name="imgIcon"
                                             Width="15"
                                             Height="15"
-                                            Margin="5,2,2,2"
+                                            Margin="15,10,2,2"
                                             HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"
+                                            VerticalAlignment="Top"
                                             RenderOptions.BitmapScalingMode="Unspecified"
                                             Stretch="Uniform">
                                             <!--  LOGO  -->
                                         </Image>
                                         <TextBlock
                                             Grid.Column="1"
-                                            Margin="10,0"
-                                            VerticalAlignment="Center"
+                                            Margin="10,10,10,0"
+                                            VerticalAlignment="Top"
                                             FontFamily="Microsoft Yahei UI"
                                             FontWeight="Normal"
                                             Foreground="{TemplateBinding TitleForeground}"
@@ -145,15 +145,16 @@
                                         <Button
                                             x:Name="btnMinimize"
                                             Grid.Column="6"
-                                            Width="22"
-                                            Height="22"
-                                            Margin="2"
-                                            Padding="6"
+                                            Width="50"
+                                            Height="35"
+                                            VerticalAlignment="Top"
                                             Panel.ZIndex="100"
                                             Background="Transparent"
                                             BorderThickness="0"
                                             Cursor="Hand">
                                             <Path
+                                                Width="11"
+                                                Height="11"
                                                 Margin="1,0"
                                                 VerticalAlignment="Center"
                                                 Data="M0,0 10,0 10,2 0,2Z"
@@ -164,10 +165,9 @@
                                         <Button
                                             x:Name="btnMaximize"
                                             Grid.Column="8"
-                                            Width="22"
-                                            Height="22"
-                                            Margin="2"
-                                            Padding="4"
+                                            Width="50"
+                                            Height="35"
+                                            VerticalAlignment="Top"
                                             Panel.ZIndex="100"
                                             Background="Transparent"
                                             BorderThickness="0"
@@ -175,6 +175,8 @@
                                             SnapsToDevicePixels="True">
                                             <Path
                                                 x:Name="btnMaximizeIcon"
+                                                Width="11"
+                                                Height="11"
                                                 Margin="1"
                                                 VerticalAlignment="Center"
                                                 Fill="{DynamicResource Major_Foreground}"
@@ -184,16 +186,17 @@
                                         <Button
                                             x:Name="btnClose"
                                             Grid.Column="10"
-                                            Width="22"
-                                            Height="22"
-                                            Margin="2"
-                                            Padding="4"
+                                            Width="50"
+                                            Height="35"
+                                            VerticalAlignment="Top"
                                             Panel.ZIndex="0"
                                             Background="Transparent"
                                             BorderThickness="0"
                                             Cursor="Hand"
                                             SnapsToDevicePixels="True">
                                             <Path
+                                                Width="11"
+                                                Height="11"
                                                 Margin="2"
                                                 VerticalAlignment="Center"
                                                 Data="M7.9,6.61,11.64,3.1a1,1,0,0,0-1.36-1.46L6.53,5.15,3,1.41A1,1,0,1,0,1.57,2.77l3.5,3.75L1.33,10a1,1,0,0,0,0,1.42,1,1,0,0,0,.73.31,1,1,0,0,0,.68-.27L6.44,8,10,11.72a1,1,0,0,0,.73.31,1,1,0,0,0,.68-.27,1,1,0,0,0,.05-1.41Z"
@@ -203,7 +206,7 @@
                                         </Button>
                                     </Grid>
                                 </Border>
-                                <Border Grid.Row="1">
+                                <Border Grid.Row="1" Padding="5,0">
                                     <Grid>
                                         <ContentPresenter />
                                     </Grid>

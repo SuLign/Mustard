@@ -98,7 +98,7 @@ internal class MustardMessageManager : IMustardMessageManager
                         if (logRecords.TryDequeue(out var logRecord))
                         {
                             var (logMsg, caller) = logRecord;
-                            var logMessage = $"{DateTime.Now:yyyy/MM/dd HH:mm:ss.fff}\t\"{logMsg}\"";
+                            var logMessage = $"{DateTime.Now:yyyy/MM/dd HH:mm:ss.fff}\t\"{(string)logMsg}\"";
 #if DEBUG
                             logMessage = logMessage + $", <{caller}>";
                             Debug.WriteLine(logMessage);

@@ -44,7 +44,7 @@ public class TResult
     }
 
     #region implicit methods
-    public static implicit operator string(TResult result) => $"state: {(result.ResultState ? "TRUE" : "FALSE")};\tvalue:{result.ResultData?.ToString()},\tmsg: {result.ResultMessage}";
+    public static implicit operator string(TResult result) => result.ResultMessage;
 
     public static implicit operator bool(TResult result) => result.ResultState;
 
@@ -55,7 +55,7 @@ public class TResult
 
     public override string ToString()
     {
-        return (string)this;
+        return $"state: {(ResultState ? "TRUE" : "FALSE")};\tvalue:{ResultData?.ToString()},\tmsg: {ResultMessage}";
     }
 }
 

@@ -23,6 +23,12 @@ public static class TextBoxStyle
            typeof(TextBoxStyle),
            new PropertyMetadata(0.5));
 
+    public static readonly DependencyProperty PrefixVerticalAlignmentProperty =
+        DependencyProperty.RegisterAttached(
+            "PrefixVerticalAlignment",
+            typeof(VerticalAlignment),
+            typeof(TextBoxStyle));
+
     public static readonly DependencyProperty HidePrefixWhenTextNullProperty =
         DependencyProperty.RegisterAttached(
            "HidePrefixWhenTextNull",
@@ -42,6 +48,12 @@ public static class TextBoxStyle
            typeof(double),
            typeof(TextBoxStyle),
            new PropertyMetadata(0.5));
+
+    public static readonly DependencyProperty SuperfixVerticalAlignmentProperty =
+        DependencyProperty.RegisterAttached(
+            "SuperfixVerticalAlignment",
+            typeof(VerticalAlignment),
+            typeof(TextBoxStyle));
 
     public static readonly DependencyProperty HideSuperfixWhenTextNullProperty =
         DependencyProperty.RegisterAttached(
@@ -68,6 +80,12 @@ public static class TextBoxStyle
     public static double GetPrefixOpacity(DependencyObject textBox)
         => (double)textBox.GetValue(PrefixOpacityProperty);
 
+    public static void SetPrefixVerticalAlignment(DependencyObject textBox, VerticalAlignment alignment)
+        => textBox.SetValue(PrefixVerticalAlignmentProperty, alignment);
+
+    public static VerticalAlignment GetPrefixVerticalAlignment(DependencyObject textBox)
+        => (VerticalAlignment)textBox.GetValue(PrefixVerticalAlignmentProperty);
+
     public static void SetSuperfixOpacity(DependencyObject textBox, double opacity)
         => textBox.SetValue(SuperfixOpacityProperty, opacity);
 
@@ -85,4 +103,10 @@ public static class TextBoxStyle
 
     public static bool GetHideSuperfixWhenTextNull(DependencyObject textBox)
         => (bool)textBox.GetValue(HideSuperfixWhenTextNullProperty);
+
+    public static void SetSuperfixVerticalAlignment(DependencyObject textBox, VerticalAlignment alignment)
+        => textBox.SetValue(SuperfixVerticalAlignmentProperty, alignment);
+
+    public static VerticalAlignment GetSuperfixVerticalAlignment(DependencyObject textBox)
+        => (VerticalAlignment)textBox.GetValue(SuperfixVerticalAlignmentProperty);
 }
